@@ -7,131 +7,214 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <!-- Header Section -->
-    <header class="header-section">
+    <!-- Sidebar Section -->
+    <aside class="sidebar">
+        <a href="#header-section" class="sidebar-icon" data-tooltip="Home">
+            <img src="home.png" alt="Home">
+        </a>
+        <a href="#about-section" class="sidebar-icon" data-tooltip="About">
+            <img src="user.png" alt="About">
+        </a>
+        <a href="#skills-section" class="sidebar-icon" data-tooltip="Skills">
+            <img src="skill.png" alt="Skills">
+        </a>
+        <a href="#experience-section" class="sidebar-icon" data-tooltip="Experience">
+            <img src="experience.png" alt="Experience">
+        </a>
+        <a href="#projects-section" class="sidebar-icon" data-tooltip="Projects">
+            <img src="projects.png" alt="Projects">
+        </a>
+        <a href="#contact-section" class="sidebar-icon" data-tooltip="Contact">
+            <img src="contact.png" alt="Contact">
+        </a>
+    </aside>
+    
+<body>
+    <header class="header-section" id="header-section" style="display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100vh; padding-bottom: 50px;">
         <div class="overlay"></div>
         <div class="container">
-            <h1>Ojas Sharma</h1>
-            <p>I'm a <span class="highlight">Data Scientist</span></p>
+            <h1 class="name">Ojas Sharma</h1>
+            <p class="title">Data Scientist | Researcher | Engineer</p>
             <div class="social-icons">
-                <a href="https://www.instagram.com/yourusername" target="_blank">
-                    <img src="insta.jpeg" alt="Instagram">
+                <a href="https://x.com/OjasSha92624851" target="_blank" class="social-link">
+                    <img src="twitter.png" alt="Instagram">
                 </a>
-                <a href="https://github.com/ojassharma7" target="_blank">
-                    <img src="git.png" alt="GitHub">
+                <a href="https://github.com/ojassharma7" target="_blank" class="social-link">
+                    <img src="github.png" alt="GitHub">
                 </a>
-                <a href="https://www.linkedin.com/in/ojassharma16" target="_blank">
+                <a href="https://www.linkedin.com/in/ojassharma16" target="_blank" class="social-link">
                     <img src="linkedin.png" alt="LinkedIn">
                 </a>
             </div>
         </div>
     </header>
-
-    <!-- About Section -->
-    <section class="about-section">
-        <div class="about-container">
-            <div class="about-image">
-                <img src="ojas.jpg" alt="Your Photo">
-            </div>
-            <div class="about-content">
-                <h2>About</h2>
-                <p>Hello! I am <span class="highlight">Ojas Sharma</span>. I am a Data Scientist passionate about solving challenging problems using data.</p>
-                <ul class="about-details">
-                    <li><strong>Birthday:</strong> 16 Nov 1999</li>
-                    <li><strong>Email:</strong> <a href="mailto:your.email@example.com">your.email@example.com</a></li>
-                    <li><strong>Location:</strong> New Jersey, USA</li>
-                    <li><strong>Available for:</strong> Full-Time Roles</li>
-                </ul>
-            </div>
+    
+ <!-- About Section -->
+ <section class="about-section" id="about-section">
+    <div class="about-container">
+        <!-- Image Section -->
+        <div class="about-image">
+            <img src="ojas.jpg" alt="Ojas Sharma">
         </div>
-    </section>
+
+        <!-- Content Section -->
+        <div class="about-content">
+            <h2>About</h2>
+            <p class="intro">
+                Hello! I am <span class="highlight">Ojas Sharma</span> a Graduate Student pursuing Master's in Statistics - Data Science from Rutgers University, New Brunswick
+            </p>
+            <ul class="about-details">
+                <li><strong>Birthday:</strong> 16 Oct 2001</li>
+                <li><strong>GitHub:</strong> <a href="https://github.com/ojassharma7" target="_blank">github.com/ojassharma7</a></li>
+                <li><strong>Phone:</strong> +1 929-684-7733</li>
+                <li><strong>Location:</strong> New Brunswick, NJ, USA</li>
+                <li><strong>Email:</strong> <a href="mailto:ojassharma16@gmail.com">ojassharma16@gmail.com</a></li>
+                <li><strong>Available for:</strong> 2025 Full-Time Roles</li>
+            </ul>
+            <p class="about-description">
+            </p>
+                 A passionate Data Scientist and aspiring AI innovator with a focus on leveraging machine learning and generative AI to solve real-world challenges. Currently pursuing my Master’s in Statistics and Data Science at Rutgers University, I specialize in building scalable machine learning pipelines, analyzing financial time series, and creating cutting-edge solutions for algorithmic trading and quantitative finance.
+                </p>
+                At the Center of Gambling Studies, I'm currently researching and analyzing a massive 4.5 TB dataset to predict problem gambling behaviors, achieving high precision with advanced ML models like Isolation Forest and XGBoost. My work in this domain underscores my ability to extract actionable insights from complex, large-scale data.
+            </p>
+                Beyond research, I’m deeply interested in the intersection of AI and finance. I’ve designed algorithmic trading strategies and harnessed generative AI techniques, such as fine-tuning LLMs, to create tailored solutions like product recommendation engines and sentiment-driven trading algorithms.
+            </p>
+                With a knack for innovation and problem-solving, I enjoy exploring the latest advancements in AI, from transformers to real-time anomaly detection. My ultimate goal is to bridge technology and finance, developing strategies that redefine what’s possible in quantitative trading and AI applications.
+            </p>
+        </div>
+    </div>
+</section>
+
 
     <!-- Skills Section -->
-    <section class="skills-section">
+    <section class="skills-section" id="skills-section">
         <div class="skills-container">
             <h2>Skills</h2>
             <div class="skills-list">
                 <div class="skill-item">
                     <h3>PYTHON</h3>
+                    <div class="percentage-container">
+                        <span class="skill-percentage">95%</span>
+                    </div>
                     <div class="skill-bar">
                         <div class="skill-level" style="width: 95%;"></div>
                     </div>
                 </div>
                 <div class="skill-item">
                     <h3>R</h3>
+                    <div class="percentage-container">
+                        <span class="skill-percentage">90%</span>
+                    </div>
                     <div class="skill-bar">
                         <div class="skill-level" style="width: 90%;"></div>
                     </div>
                 </div>
                 <div class="skill-item">
                     <h3>MYSQL</h3>
+                    <div class="percentage-container">
+                        <span class="skill-percentage">90%</span>
+                    </div>
                     <div class="skill-bar">
                         <div class="skill-level" style="width: 90%;"></div>
                     </div>
                 </div>
                 <div class="skill-item">
                     <h3>PYSPARK</h3>
+                    <div class="percentage-container">
+                        <span class="skill-percentage">95%</span>
+                    </div>
                     <div class="skill-bar">
                         <div class="skill-level" style="width: 95%;"></div>
                     </div>
                 </div>
                 <div class="skill-item">
                     <h3>PYTORCH</h3>
+                    <div class="percentage-container">
+                        <span class="skill-percentage">85%</span>
+                    </div>
                     <div class="skill-bar">
                         <div class="skill-level" style="width: 85%;"></div>
                     </div>
                 </div>
                 <div class="skill-item">
-                    <h3>GIT</h3>
+                    <h3>NOSQL</h3>
+                    <div class="percentage-container">
+                        <span class="skill-percentage">80%</span>
+                    </div>
                     <div class="skill-bar">
-                        <div class="skill-level" style="width: 95%;"></div>
+                        <div class="skill-level" style="width: 80%;"></div>
                     </div>
                 </div>
                 <div class="skill-item">
-                    <h3>MACOS</h3>
+                    <h3>GIT</h3>
+                    <div class="percentage-container">
+                        <span class="skill-percentage">95%</span>
+                    </div>
                     <div class="skill-bar">
                         <div class="skill-level" style="width: 95%;"></div>
                     </div>
                 </div>
                 <div class="skill-item">
                     <h3>C++</h3>
+                    <div class="percentage-container">
+                        <span class="skill-percentage">80%</span>
+                    </div>
                     <div class="skill-bar">
                         <div class="skill-level" style="width: 80%;"></div>
                     </div>
                 </div>
                 <div class="skill-item">
-                    <h3>NOSQL</h3>
+                    <h3>MACOS</h3>
+                    <div class="percentage-container">
+                        <span class="skill-percentage">95%</span>
+                    </div>
                     <div class="skill-bar">
-                        <div class="skill-level" style="width: 80%;"></div>
+                        <div class="skill-level" style="width: 95%;"></div>
                     </div>
                 </div>
                 <div class="skill-item">
                     <h3>LINUX</h3>
+                    <div class="percentage-container">
+                        <span class="skill-percentage">90%</span>
+                    </div>
                     <div class="skill-bar">
                         <div class="skill-level" style="width: 90%;"></div>
                     </div>
                 </div>
                 <div class="skill-item">
                     <h3>TABLEAU</h3>
+                    <div class="percentage-container">
+                        <span class="skill-percentage">90%</span>
+                    </div>
                     <div class="skill-bar">
                         <div class="skill-level" style="width: 90%;"></div>
                     </div>
                 </div>
                 <div class="skill-item">
                     <h3>GENERATIVE AI</h3>
+                    <div class="percentage-container">
+                        <span class="skill-percentage">80%</span>
+                    </div>
                     <div class="skill-bar">
                         <div class="skill-level" style="width: 80%;"></div>
                     </div>
                 </div>
                 <div class="skill-item">
                     <h3>BLOOMBERG TERMINAL</h3>
+                    <div class="percentage-container">
+                        <span class="skill-percentage">90%</span>
+                    </div>
                     <div class="skill-bar">
                         <div class="skill-level" style="width: 90%;"></div>
                     </div>
                 </div>
                 <div class="skill-item">
                     <h3>BIG DATA</h3>
+                    <div class="percentage-container">
+                        <span class="skill-percentage">85%</span>
+                    </div>
                     <div class="skill-bar">
                         <div class="skill-level" style="width: 85%;"></div>
                     </div>
@@ -139,76 +222,79 @@
             </div>
         </div>
     </section>
+    
 
 
-    <!-- Resume Section -->
-<section class="resume-section">
-    <div class="resume-container">
-        <h2>Resume</h2>
-        <div class="resume-content">
-            <div class="summary">
-                <h3>Summary</h3>
-                <p>
-                    <strong>Ojas Sharma</strong><br>
-                    
-
-I’m Ojas Sharma, a passionate Data Scientist and aspiring AI innovator with a focus on leveraging machine learning and generative AI to solve real-world challenges. Currently pursuing my Master’s in Statistics and Data Science at Rutgers University, I specialize in building scalable machine learning pipelines, analyzing financial time series, and creating cutting-edge solutions for algorithmic trading and quantitative finance.
-
-At the Center of Gambling Studies, I'm currently researching and analyzing a massive 4.5TB dataset to predict problem gambling behaviors, achieving high precision with advanced ML models like Isolation Forest and XGBoost. My work in this domain underscores my ability to extract actionable insights from complex, large-scale data.
-
-Beyond research, I’m deeply interested in the intersection of AI and finance. I’ve designed algorithmic trading strategies and harnessed generative AI techniques, such as fine-tuning LLMs, to create tailored solutions like product recommendation engines and sentiment-driven trading algorithms.
-
-With a knack for innovation and problem-solving, I enjoy exploring the latest advancements in AI, from transformers to real-time anomaly detection. My ultimate goal is to bridge technology and finance, developing strategies that redefine what’s possible in quantitative trading and AI applications.
-
-When I’m not coding or optimizing algorithms, you’ll find me exploring new financial markets, diving into AI research papers, or brainstorming the next big project. Let’s connect to collaborate on generative AI, algorithmic trading, or any data-driven innovation!
-                </p>
-            </div>
-            <div class="timeline">
-                <div class="education">
-                    <h3>Education</h3>
-                    <ul>
-                        <li>
-                            <strong>Master of Science in Data Science</strong><br>
-                            Rutgers University, New Jersey<br>
-                            <span>2023 - Present</span>
-                        </li>
-                        <li>
-                            <strong>Bachelor of Technology in Computer Science</strong><br>
-                            Manipal University, India<br>
-                            <span>2019 - 2023</span>
-                        </li>
-                    </ul>
+    <!-- Experience Section -->
+<section class="timeline-section" id="timeline-section">
+    <div class="timeline-container">
+        <!-- Education Section -->
+        <h2>Education</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Masters in Statistics - Data Science</h3>
+                    <p class="timeline-date">2023 - 2025</p>
+                    <p>Rutgers University, New Brunswick, NJ</p>
                 </div>
-                <div class="experience">
-                    <h3>Work Experience</h3>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Bachelor of Technology in Computer Science</h3>
+                    <p class="timeline-date">2019 - 2023</p>
+                    <p>Manipal University, Jaipur, Rajasthan, India</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experience Section -->
+        <h2>Professional Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Data Scientist (Research Assistant)</h3>
+                    <p class="timeline-date">April 2023 - Present</p>
+                    <p class="organization">Center of Gambling Studies, New Jersey</p>
                     <ul>
-                        <li>
-                            <strong>Data Scientist(Research Assistant)</strong><br>
-                            Center of Gambling Studies, New Jersey<br>
-                            <span>2023</span><br>
-                            Worked on predictive analytics models to improve business decisions.
-                        </li>
-                        <li>
-                            <strong>Data Analyst </strong><br>
-                            Omalco Extrusion, India<br>
-                            <span>2022 - 2023</span><br>
-                            Assisted in data analysis for company-wide projects.
-                        </li>
+                        <li>Conducted extensive data analysis on a 4.5 TB dataset encompassing 13.6 billion records.</li>
+                        <li>Applied advanced hyperparameter optimization techniques, including
+                            GridSearchCV, achieving a 20% reduction in false positives and enhancing model reliability for predictive behavioral analysis.</li>
+                        <li>Achieved 90% accuracy in identifying high-risk behaviors using anomaly detection techniques.</li>
+                        <li>Developing end-to-end machine learning pipelines, streamlining data preprocessing, feature selection, model training, and
+                            deployment.</li>
                     </ul>
                 </div>
             </div>
-            <a class="download-button" href="Resume_Ojas_Sharma.pdf" download>Download Resume</a>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Data Analyst</h3>
+                    <p class="timeline-date">Aug 2022 - July 2023</p>
+                    <p class="organization">Omalco Extrusion, India</p>
+                    <ul>
+                        <li>Utilized Apache Spark’s distributed computing for parallelized data processing.</li>
+                        <li>Built and optimized Power BI dashboards leveraging DAX and Power Query</li>
+                        <li>Integrated real-time pipelines for market analysis and implemented ARIMA and Prophet models.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
+    
+    
+
     <!-- Projects Section -->
-<section class="projects-section">
+<section class="projects-section" id="projects-section"> 
     <div class="projects-container">
-        <h2>Projects</h2>
+        <h1>Projects</h1>
         <div class="projects-list">
             <div class="project-item">
-                <img src="project1.jpg" alt="Project 1">
+                <img src="project.png" alt="Project 1">
                 <div class="project-content">
                     <h3>LLM-Powered Product Recommendations</h3>
                     <p>Fine-tuned LLMs (Mistral-7B, TinyLlama) for product recommendation using Amazon Review Dataset. Achieved
@@ -217,7 +303,7 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
                 </div>
             </div>
             <div class="project-item">
-                <img src="project2.jpg" alt="Project 2">
+                <img src="project.png" alt="Project 2">
                 <div class="project-content">
                     <h3>Twitter Data Analysis(Search Application for Twitter) </h3>
                     <p>Parallelized Data Processing: Leveraged joblib's Parallel and Delayed.  Implemented LRU Caching: Developed an in-memory LRU cache, reducing retrieval time from 5 seconds to 0.4 second
@@ -227,7 +313,7 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
                 </div>
             </div>
             <div class="project-item">
-                <img src="project2.jpg" alt="Project 2">
+                <img src="project.png" alt="Project 2">
                 <div class="project-content">
                     <h3>Explore Crime Data with the Campus Watch Dash App: Rutgers University–New Brunswick</h3>
                     <p>Implemented dynamic web scaping using Selenium to extract daily crime records from SpotCrime.
@@ -238,7 +324,7 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
                 </div>
             </div>
             <div class="project-item">
-                <img src="project2.jpg" alt="Project 2">
+                <img src="project.png" alt="Project 2">
                 <div class="project-content">
                     <h3>PAIR-WISE-ALGORITHMIC-TRADING WITH COINTEGRATION ANALYSIS</h3>
                     <p>Designed and Implemented Pairs Trading Algorithm leveraging cointegration analysis and advanced statistical modeling to
@@ -248,7 +334,7 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
                 </div>
             </div>
             <div class="project-item">
-                <img src="project2.jpg" alt="Project 2">
+                <img src="project.png" alt="Project 2">
                 <div class="project-content">
                     <h3>RAG MODELS</h3>
                     <p>This project explores and compares different Retrieval-Augmented Generation (RAG) techniques to evaluate their performance across multiple metrics, including accuracy, latency, and resource usage.
@@ -257,7 +343,7 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
                 </div>
             </div>
             <div class="project-item">
-                <img src="project2.jpg" alt="Project 2">
+                <img src="project.PNG" alt="Project 2">
                 <div class="project-content">
                     <h3>RAG-Based-LLM-Application</h3>
                     <p>An advanced Retrieval-Augmented Generation (RAG) pipeline for question answering using the LLaMA 3 model integrated with LangChain, along with a fine-tuning capability and a FastAPI interface for serving the model.
@@ -269,12 +355,12 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
     </div>
 </section>
 
-    <!-- Contact Section -->
-<section class="contact-section">
+   <!-- Contact Section -->
+<section class="contact-section" id="contact-section">
     <div class="contact-container">
         <h2>Contact</h2>
         <p>Let’s connect or collaborate! Feel free to reach out to me using the form below or via email.</p>
-        <form action="https://formspree.io/f/your_form_id" method="POST">
+        <form action="https://formspree.io/f/xrbbnewg" method="POST">
             <div class="form-group">
                 <input type="text" name="name" placeholder="Your Name" required>
             </div>
@@ -287,11 +373,15 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
             <button type="submit" class="contact-button">Send Message</button>
         </form>
         <div class="contact-info">
-            <p><strong>Email:</strong> <a href="mailto:your.email@example.com">ojassharma16@gmail.com</a></p>
+            <h1 class="name">Ojas Sharma</h1>
             <p><strong>Phone:</strong> +1 929-684-7733</p>
+            <p><strong>Email:</strong> <a href="mailto:ojassharma16@gmail.com">ojassharma16@gmail.com</a></p>
+             <p><strong>GitHub:</strong> <a href="https://github.com/ojassharma7" target="_blank">github.com/ojassharma7</a></p>
+            <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ojassharma16" target="_blank">linkedin.com/in/ojassharma16</a></p>
         </div>
     </div>
 </section>
+
 
 
     <!-- Footer Section -->
@@ -302,13 +392,58 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
             <a href="#header-section">Home</a>
             <a href="#about-section">About</a>
             <a href="#skills-section">Skills</a>
-            <a href="#resume-section">Resume</a>
+            <a href="#experience-section">Experience</a>
+            <a href="#projects-section">Projects</a>
             <a href="#contact-section">Contact</a>
         </div>
     </div>
 </footer>
 
+<!-- Smooth Scrolling Script -->
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+<!-- Scroll-to-Top Button -->
+<div id="scrollToTop" class="scroll-to-top">
+    <span>&uarr;</span>
+</div>
 
+<!-- Place the JavaScript here -->
+<script>
+    // Get the button element
+    const scrollToTopButton = document.getElementById('scrollToTop');
+
+    // Show the button after scrolling down
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) { // Show button after 300px of scrolling
+            scrollToTopButton.classList.add('show');
+        } else {
+            scrollToTopButton.classList.remove('show');
+        }
+    });
+
+    // Smooth scroll to top when button is clicked
+    scrollToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Smooth scrolling effect
+        });
+    });
+</script>
+</body>
+</html>
+
+<!-- Scroll-to-Top Button -->
+<div id="scrollToTop" class="scroll-to-top">
+    <span>&uarr;</span> <!-- Upward arrow -->
+</div>
 
 
     <!-- Styles -->
@@ -355,7 +490,7 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
         }
 
         .highlight {
-            color: #4CAF50;
+            color: #ffffff;
         }
 
         .social-icons {
@@ -414,7 +549,7 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
         }
 
         .about-content .highlight {
-            color: #4CAF50;
+            color: #0074cc;
             font-weight: bold;
         }
 
@@ -429,7 +564,7 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
         }
 
         .about-details a {
-            color: #4CAF50;
+            color: #0074cc;
             text-decoration: none;
         }
 
@@ -479,28 +614,28 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
 
         .skill-level {
             height: 100%;
-            background-color: #4CAF50;
+            background-color: #0074cc;
             border-radius: 5px;
         }
 
-        /* Resume Section Styles */
-        .resume-section {
+        /* experience Section Styles */
+        .experience-section {
             padding: 50px;
             background-color: #f9f9f9;
         }
 
-        .resume-container {
+        .experience-container {
             max-width: 800px;
             margin: 0 auto;
             text-align: center;
         }
 
-        .resume-container h2 {
+        .experience-container h2 {
             font-size: 2.5rem;
             margin-bottom: 20px;
         }
 
-        .resume-content {
+        .experience-content {
             text-align: left;
         }
 
@@ -597,7 +732,7 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
     }
 
     .project-link {
-        color: #4CAF50;
+        color: #0074cc;
         text-decoration: none;
         font-weight: bold;
     }
@@ -648,7 +783,7 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
 
     .contact-button {
         padding: 10px 20px;
-        background-color: #4CAF50;
+        background-color: #0074cc;
         color: white;
         border: none;
         border-radius: 5px;
@@ -657,7 +792,7 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
     }
 
     .contact-button:hover {
-        background-color: #45a049;
+        background-color: #0074cc;
     }
 
     .contact-info {
@@ -666,7 +801,7 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
     }
 
     .contact-info a {
-        color: #4CAF50;
+        color: #0074cc;
         text-decoration: none;
     }
 
@@ -696,7 +831,7 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
     }
 
     .footer-links a {
-        color: #4CAF50;
+        color: #0074cc;
         text-decoration: none;
         font-size: 1rem;
     }
@@ -708,6 +843,50 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
     .footer-container p {
         margin: 0;
         font-size: 0.9rem;
+    }
+</style>
+
+<style>
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .about-container,
+        .timeline {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .about-image img {
+            margin-bottom: 20px;
+        }
+
+        .skills-list {
+            grid-template-columns: 1fr;
+        }
+
+        .social-icons {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+        .download-button {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .skills-container h2,
+        .resume-container h2 {
+            font-size: 2rem;
+        }
     }
 </style>
 

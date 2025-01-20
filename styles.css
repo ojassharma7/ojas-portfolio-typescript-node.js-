@@ -1,84 +1,705 @@
-/* styles.css */
-
+/* General Reset */
 body {
-    font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+}
+/* About Section Styles */
+.about-section {
+    padding: 50px;
     background-color: #f9f9f9;
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 30px; /* Space between the image and text */
+}
+
+.about-image img {
+    width: 500px !important;
+    height: 700px !important;
+    border-radius: 0 !important; /* Forcefully removes circular shapes */
+    object-fit: cover !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+
+
+.about-content {
+    flex: 1; /* Take the remaining space */
+}
+
+.about-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
     color: #333;
 }
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
+.about-content h3 {
+    font-size: 1.5rem;
+    color: #0074cc;
+    margin-bottom: 20px;
 }
 
-.nav-links {
+.about-content .intro {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.about-details {
     list-style: none;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns for details */
+    gap: 10px;
 }
 
-.nav-links a {
-    color: white;
+.about-details li {
+    font-size: 1rem;
+    color: #333;
+}
+
+.about-details a {
+    color: #0074cc;
     text-decoration: none;
-    font-weight: bold;
 }
 
-.nav-links a:hover {
+.about-details a:hover {
     text-decoration: underline;
 }
 
-.header-content h1 {
-    margin: 0;
-    font-size: 2.5rem;
+.about-description {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #0074cc;
+    text-align: justify; /* Full-width paragraph alignment */
 }
 
-.header-content p {
-    font-size: 1.2rem;
+
+
+
+/* Sidebar Section */
+.sidebar {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 10;
 }
 
-section {
-    padding: 40px 20px;
+.sidebar-icon {
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sidebar-icon img {
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+}
+
+.sidebar-icon:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.header-section {
+    position: relative;
+    background: url('background-image.jpg') no-repeat center center/cover;
+    height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Push content to the bottom */
+    align-items: center;
+    padding-bottom: 50px; /* Distance from the bottom */
     text-align: center;
 }
 
-h2 {
-    color: #4CAF50;
+.container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
 }
 
-.project-list {
+
+
+.name {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 0;
+    background: linear-gradient(to right, #807674, hsl(25, 27%, 86%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.title {
+    font-size: 1.8rem;
+    color: #d1cfc3;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.social-icons {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.social-link img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-link img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+
+/* Gradient Slide Animation for Name */
+@keyframes gradient-slide {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.name {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 0;
+    background: linear-gradient(45deg, #ffffff, #8b4513, #0074cc); /* White, Brown, Blue */
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-slide 4s ease infinite;
+    letter-spacing: 2px; /* Spacing for modern look */
+}
+
+/* Fade-In Rotate Animation for Title */
+@keyframes fade-rotate {
+    0% {
+        opacity: 0;
+        transform: rotateX(90deg);
+    }
+    100% {
+        opacity: 1;
+        transform: rotateX(0deg);
+    }
+}
+
+.title {
+    font-size: 1.8rem;
+    color: #ffffff; /* Clean white */
+    margin: 10px 0;
+    font-weight: bold;
+    animation: fade-rotate 2s ease forwards;
+}
+
+/* Pulse-In Animation for Social Icons */
+@keyframes pulse-in {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.social-icons {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: center; /* Center align icons */
+}
+
+.social-link img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #0074cc; /* Blue background */
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: pulse-in 1s ease forwards;
+}
+
+.social-link img:hover {
+    transform: scale(1.3);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.social-link img:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.social-link img:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.social-link img:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+/* Floating Animation for Entire Container */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.container {
+    animation: float 3s ease-in-out infinite; /* Subtle floating effect */
+}
+
+
+
+
+
+/* Social Media Icons */
+.social-link img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-link img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 12px rgba(213, 197, 197, 0.4);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+
+/* Social Media Icons */
+.social-icons {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: center; /* Center align icons */
+}
+
+.social-link img {
+    width: 40px; /* Make icons smaller */
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-link img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+
+
+/* Project Section */
+.projects-section {
+    padding: 50px;
+    background-color: #fff;
+}
+
+.projects-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.projects-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.projects-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    margin-top: 20px;
 }
 
 .project-item {
-    padding: 20px;
-    border: 1px solid #ddd;
+    background: #f9f9f9;
     border-radius: 8px;
-    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+}
+
+/* Project Images - Ensure Proper Sizing */
+.project-item img {
+    width: 100px !important; /* Force the width to 100px */
+    height: auto !important; /* Maintain aspect ratio */
+    margin: 0 auto 15px !important; /* Center and add spacing */
+    display: block !important; /* Ensure block-level alignment */
+}
+
+
+.project-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.project-content p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.project-link {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #0074cc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.project-link:hover {
+    color: #005bb5;
+    text-decoration: underline;
+}
+
+
+/* SKILL Section Styles */
+
+/* Section Styling */
+.skills-section {
+    padding: 50px;
+    background-color: #fff;
+}
+
+.skills-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.skills-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #333;
+}
+
+.skills-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px; /* Space between items */
+}
+
+/* Individual Skill Item */
+.skill-item {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.skill-item h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Percentage Text Styling */
+.percentage-container {
+    display: flex;
+    justify-content: flex-start; /* Align percentage with the bar's start */
+    margin-bottom: 5px; /* Space between percentage and the bar */
+}
+
+.skill-percentage {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333; /* Blue color for consistency */
+}
+
+/* Progress Bar Styling */
+.skill-bar {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.skill-level {
+    height: 100%;
+    background-color: #0074cc; /* Blue progress bar color */
+    border-radius: 5px;
+    transition: width 1s ease-in-out; /* Smooth fill animation */
+}
+
+
+/* General Timeline Section Styles */
+.timeline-section {
+    padding: 50px;
+    background-color: #fff;
+}
+
+.timeline-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.timeline-container h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: left;
+    border-bottom: 2px solid #0074cc;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* General Timeline Section Styles */
+.timeline-section {
+    padding: 50px;
+    background-color: #fff;
+}
+
+.timeline-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.timeline-container h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: left;
+    border-bottom: 2px solid #0074cc;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* Timeline Styles */
+.timeline {
+    position: relative;
+    padding-left: 40px;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #0074cc;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    background: #0074cc;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px #0074cc;
+}
+
+/* Timeline Content Styles */
+.timeline-content {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #0074cc;
+    margin-bottom: 5px;
+}
+
+.timeline-content .timeline-date {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.timeline-content .organization {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Bullet Points */
+.timeline-content ul {
+    margin: 10px 0 0 20px; /* Indented from the content */
+    padding: 0;
+}
+
+.timeline-content ul li {
+    margin-bottom: 10px; /* Space between bullet points */
+    font-size: 0.95rem; /* Slightly smaller text for bullet points */
+    line-height: 1.6; /* Spaced for readability */
+    color: #555;
+    list-style-type: disc; /* Standard bullet point */
+}
+
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 10;
+}
+
+.sidebar-icon {
+    position: relative; /* Enables positioning for the tooltip */
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none; /* Removes underline from links */
+}
+
+.sidebar-icon:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Tooltip Styling */
+.sidebar-icon::after {
+    content: attr(data-tooltip); /* Display the text from the data-tooltip attribute */
+    position: absolute;
+    left: 70px; /* Position tooltip to the right of the icon */
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #0074cc; /* Tooltip background color */
+    color: white; /* Tooltip text color */
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 5px;
+    white-space: nowrap; /* Prevents the text from wrapping */
+    opacity: 0; /* Hidden by default */
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.project-item h3 {
-    margin-top: 0;
+/* Show Tooltip on Hover */
+.sidebar-icon:hover::after {
+    opacity: 1; /* Makes the tooltip visible */
+    visibility: visible;
 }
 
-.project-item a {
-    color: #4CAF50;
-    text-decoration: none;
+/* Scroll-to-Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px; /* Distance from the bottom of the page */
+    right: 20px; /* Distance from the right of the page */
+    width: 50px;
+    height: 50px;
+    background-color: #0074cc; /* Blue background */
+    border-radius: 50%; /* Make it circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    cursor: pointer;
+    opacity: 0; /* Initially hidden */
+    visibility: hidden; /* Hidden until scrolling down */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000; /* Ensure it stays above other elements */
 }
 
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    margin-top: 20px;
+.scroll-to-top span {
+    font-size: 1.5rem; /* Arrow size */
+    color: white; /* Arrow color */
+}
+
+/* Show button when scrolled */
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
 }
