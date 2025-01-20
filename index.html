@@ -269,6 +269,31 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
     </div>
 </section>
 
+    <!-- Contact Section -->
+<section class="contact-section">
+    <div class="contact-container">
+        <h2>Contact</h2>
+        <p>Feel free to reach out to me using the form below or via email.</p>
+        <form action="https://formspree.io/f/your_form_id" method="POST">
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="contact-button">Send Message</button>
+        </form>
+        <div class="contact-info">
+            <p><strong>Email:</strong> <a href="mailto:your.email@example.com">ojassharma16@gmail.com</a></p>
+            <p><strong>Phone:</strong> +1 929-684-7733</p>
+        </div>
+    </div>
+</section>
+
+
 
 
     <!-- Styles -->
@@ -563,6 +588,74 @@ When I’m not coding or optimizing algorithms, you’ll find me exploring new f
     }
 
     .project-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+
+<style>
+    /* Contact Section Styles */
+    .contact-section {
+        padding: 50px;
+        background-color: #fff;
+    }
+
+    .contact-container {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .contact-container h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .contact-container p {
+        margin-bottom: 30px;
+        font-size: 1rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    .contact-button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .contact-button:hover {
+        background-color: #45a049;
+    }
+
+    .contact-info {
+        margin-top: 20px;
+        font-size: 1rem;
+    }
+
+    .contact-info a {
+        color: #4CAF50;
+        text-decoration: none;
+    }
+
+    .contact-info a:hover {
         text-decoration: underline;
     }
 </style>
