@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { CheckCircleIcon, ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { useState, useEffect, ReactNode, ChangeEvent, FormEvent } from 'react';
 import Layout from '@/components/Layout';
+import ChatBot from './components/ChatBot';
 
 const MotionBox = motion(Box);
 
@@ -457,6 +458,7 @@ export default function Home() {
           </VStack>
         </Container>
       </Box>
+      <ChatBot />
     </Layout>
   );
 }
