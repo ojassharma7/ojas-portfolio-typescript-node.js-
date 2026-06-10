@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import RunningChart from '@/components/RunningChart';
+import StravaDashboard from '@/components/StravaDashboard';
 import Window from '@/components/Window';
 import { life } from '@/lib/profile';
 
@@ -61,37 +62,43 @@ export default function Life() {
         </div>
       </section>
 
-      {/* running dashboard */}
+      {/* running dashboard — real Strava data, with a static fallback before creds exist */}
       <Reveal>
-        <Window title="~/life/running — garmin-sync.log">
+        <Window title="~/life/running — strava-sync.log">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h2 className="text-xl font-bold text-term-purple">Still running</h2>
-            <span className="text-xs text-term-muted">source: {life.running.source}</span>
+            <span className="text-xs text-term-muted">source: Strava</span>
           </div>
           <p className="mt-2 text-sm text-term-muted">{life.running.note}</p>
 
-          <div className="mt-6 space-y-4 text-sm">
-            <div>
-              <div className="mb-1.5 flex justify-between text-xs text-term-muted">
-                <span>weekly volume — last {life.running.weeks.length} weeks</span>
-                <span className="text-term-yellow">~{km} km / week</span>
-              </div>
-              <RunningChart weeks={life.running.weeks} />
-            </div>
-            <div className="grid grid-cols-3 gap-3">
-              <div className="rounded border border-term-border bg-term-bg px-3 py-3 text-center">
-                <div className="text-lg font-bold text-term-yellow">~{km} km</div>
-                <div className="mt-0.5 text-[11px] text-term-muted">per week</div>
-              </div>
-              <div className="rounded border border-term-border bg-term-bg px-3 py-3 text-center">
-                <div className="text-lg font-bold text-term-yellow">Garmin</div>
-                <div className="mt-0.5 text-[11px] text-term-muted">every step logged</div>
-              </div>
-              <div className="rounded border border-term-border bg-term-bg px-3 py-3 text-center">
-                <div className="text-lg font-bold text-term-yellow">ACL ✓</div>
-                <div className="mt-0.5 text-[11px] text-term-muted">rebuilt &amp; tested</div>
-              </div>
-            </div>
+          <div className="mt-6">
+            <StravaDashboard
+              fallback={
+                <div className="space-y-4 text-sm">
+                  <div>
+                    <div className="mb-1.5 flex justify-between text-xs text-term-muted">
+                      <span>weekly volume — last {life.running.weeks.length} weeks</span>
+                      <span className="text-term-yellow">~{km} km / week</span>
+                    </div>
+                    <RunningChart weeks={life.running.weeks} />
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="rounded border border-term-border bg-term-bg px-3 py-3 text-center">
+                      <div className="text-lg font-bold text-term-yellow">~{km} km</div>
+                      <div className="mt-0.5 text-[11px] text-term-muted">per week</div>
+                    </div>
+                    <div className="rounded border border-term-border bg-term-bg px-3 py-3 text-center">
+                      <div className="text-lg font-bold text-term-yellow">Strava</div>
+                      <div className="mt-0.5 text-[11px] text-term-muted">every run logged</div>
+                    </div>
+                    <div className="rounded border border-term-border bg-term-bg px-3 py-3 text-center">
+                      <div className="text-lg font-bold text-term-yellow">ACL ✓</div>
+                      <div className="mt-0.5 text-[11px] text-term-muted">rebuilt &amp; tested</div>
+                    </div>
+                  </div>
+                </div>
+              }
+            />
           </div>
         </Window>
       </Reveal>

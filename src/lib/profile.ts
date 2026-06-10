@@ -185,15 +185,15 @@ export const life = {
   ],
   running: {
     weeklyKm: 20,
-    // last 8 weeks of volume, oldest first — swap in real Garmin exports later
+    // fallback bars shown only before the live Strava feed is configured
     weeks: [16, 21, 18, 23, 19, 24, 21, 20],
-    source: 'Garmin',
-    note: 'The knee is rebuilt and the engine still runs — roughly 20 km a week, tracked on Garmin.',
+    source: 'Strava',
+    note: 'The knee is rebuilt and the engine still runs — tracked on Strava, synced live below.',
   },
   sideBuilds: [
     { name: 'ask-ojas', desc: 'The terminal chatbot on this very site — ask it anything about me.' },
     { name: 'this portfolio', desc: 'Next.js + Tailwind + Framer Motion, riced like my Linux setup.' },
-    { name: 'running analytics', desc: 'Tinkering with Garmin data exports — pace, cadence, recovery trends.' },
+    { name: 'running analytics', desc: 'A live Strava dashboard on this site — weekly volume, pace trends, recent runs.' },
   ],
 };
 
@@ -299,7 +299,7 @@ ${projects.map((p) => `- ${p.title} (${p.github}): ${p.description} ${p.details.
 ${skills.map((s) => `${s.group}: ${s.items.join(', ')}`).join('\n')}
 
 == LIFE ==
-Before data science, Ojas was a professional footballer in Germany. A torn ACL ended his playing career, and during recovery he pivoted to data science — bringing an athlete's discipline to ML and AI work. He still runs about ${life.running.weeklyKm} km per week, tracked on Garmin. He builds side projects for fun, including this portfolio and the chatbot you are right now.
+Before data science, Ojas was a professional footballer in Germany. A torn ACL ended his playing career, and during recovery he pivoted to data science — bringing an athlete's discipline to ML and AI work. He still runs about ${life.running.weeklyKm} km per week, tracked on Strava (a live dashboard on this site visualizes it). He builds side projects for fun, including this portfolio and the chatbot you are right now.
 
 ${
     knowledge.notes.length
