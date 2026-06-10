@@ -1,59 +1,96 @@
 import { NextResponse } from 'next/server';
+import Anthropic from '@anthropic-ai/sdk';
+import { buildSystemPrompt, identity } from '@/lib/profile';
+
+const MAX_HISTORY = 20;
+const MAX_MESSAGE_LENGTH = 1000;
+const MAX_RESPONSE_TOKENS = 500;
+
+// Free-tier model served via Hugging Face Inference Providers
+const HF_MODEL = 'meta-llama/Llama-3.1-8B-Instruct';
+
+type ChatMessage = { role: 'user' | 'assistant'; content: string };
+
+function parseMessages(body: unknown): ChatMessage[] | null {
+  const messages = (body as { messages?: unknown })?.messages;
+  if (
+    !Array.isArray(messages) ||
+    messages.length === 0 ||
+    !messages.every(
+      (m) =>
+        (m.role === 'user' || m.role === 'assistant') &&
+        typeof m.content === 'string' &&
+        m.content.length <= MAX_MESSAGE_LENGTH
+    )
+  ) {
+    return null;
+  }
+  return messages.slice(-MAX_HISTORY);
+}
+
+async function askClaude(messages: ChatMessage[]): Promise<string | undefined> {
+  const anthropic = new Anthropic();
+  const response = await anthropic.messages.create({
+    model: process.env.ANTHROPIC_MODEL ?? 'claude-opus-4-8',
+    max_tokens: MAX_RESPONSE_TOKENS,
+    system: buildSystemPrompt(),
+    messages,
+  });
+  const block = response.content.find((b) => b.type === 'text');
+  return block && block.type === 'text' ? block.text.trim() : undefined;
+}
+
+async function askHuggingFace(messages: ChatMessage[]): Promise<string | undefined> {
+  const response = await fetch('https://router.huggingface.co/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.HF_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: HF_MODEL,
+      max_tokens: MAX_RESPONSE_TOKENS,
+      messages: [{ role: 'system', content: buildSystemPrompt() }, ...messages],
+    }),
+  });
+  if (!response.ok) {
+    throw new Error(`HF API ${response.status}: ${await response.text()}`);
+  }
+  const data = await response.json();
+  return data.choices?.[0]?.message?.content?.trim();
+}
 
 export async function POST(req: Request) {
-  const { message } = await req.json();
+  let messages: ChatMessage[] | null;
+  try {
+    messages = parseMessages(await req.json());
+  } catch {
+    messages = null;
+  }
+  if (!messages) {
+    return NextResponse.json({ error: 'invalid request' }, { status: 400 });
+  }
 
-  const HF_API_KEY = process.env.HF_API_KEY;
+  if (!process.env.ANTHROPIC_API_KEY && !process.env.HF_TOKEN) {
+    return NextResponse.json(
+      { error: `chat is offline right now — email ${identity.email} instead.` },
+      { status: 503 }
+    );
+  }
 
   try {
-    console.log('Sending request to Hugging Face API...');
-    const response = await fetch(
-      'https://api-inference.huggingface.co/models/distilbert-base-uncased-finetuned-sst-2-english',
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${HF_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          inputs: message
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Hugging Face API Error:', {
-        status: response.status,
-        statusText: response.statusText,
-        error: errorText
-      });
-      return NextResponse.json(
-        { error: `API Error: ${response.status} ${response.statusText}` },
-        { status: response.status }
-      );
+    const reply = process.env.ANTHROPIC_API_KEY
+      ? await askClaude(messages)
+      : await askHuggingFace(messages);
+    if (!reply) {
+      return NextResponse.json({ error: 'empty response — try again.' }, { status: 502 });
     }
-
-    const data = await response.json();
-    console.log('Hugging Face API Response:', data);
-    
-    if (!data || !Array.isArray(data) || data.length === 0) {
-      console.error('Unexpected API response format:', data);
-      return NextResponse.json(
-        { error: 'Invalid response format from API' },
-        { status: 500 }
-      );
-    }
-
-    // The model returns an array of results with labels and scores
-    const result = data[0];
-    const answer = `Sentiment: ${result.label} (confidence: ${(result.score * 100).toFixed(2)}%)`;
-    return NextResponse.json({ response: answer });
+    return NextResponse.json({ response: reply });
   } catch (err) {
-    console.error('API Route Exception:', err);
+    console.error('chat route error:', err);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: `something broke on my end — email ${identity.email} instead.` },
       { status: 500 }
     );
   }
-} 
+}

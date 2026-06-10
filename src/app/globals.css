@@ -1,43 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* dark terminal palette (default) — RGB triples so Tailwind opacity modifiers work */
+  --t-bg: 10 14 20;
+  --t-surface: 15 20 31;
+  --t-raised: 19 26 40;
+  --t-border: 30 38 54;
+  --t-text: 200 208 224;
+  --t-muted: 92 104 131;
+  --t-green: 158 206 106;
+  --t-blue: 122 162 247;
+  --t-purple: 187 154 247;
+  --t-red: 247 118 142;
+  --t-yellow: 224 175 104;
+  --t-cyan: 125 207 255;
+  color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html.light {
+  /* light terminal palette — same hues, readable on paper-white */
+  --t-bg: 242 244 248;
+  --t-surface: 255 255 255;
+  --t-raised: 233 237 244;
+  --t-border: 209 215 228;
+  --t-text: 52 59 79;
+  --t-muted: 118 128 154;
+  --t-green: 88 117 57;
+  --t-blue: 46 125 233;
+  --t-purple: 120 71 189;
+  --t-red: 245 42 101;
+  --t-yellow: 140 108 62;
+  --t-cyan: 0 113 151;
+  color-scheme: light;
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+html {
   scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @apply bg-term-bg text-term-text font-mono antialiased;
+  background-image: radial-gradient(
+    ellipse 80% 50% at 50% -20%,
+    rgb(var(--t-blue) / 0.08),
+    transparent
+  );
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+::selection {
+  @apply bg-term-cyan/30 text-term-text;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-term-bg;
+}
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-term-border;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-term-muted;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* --- background: aurora blobs + blueprint grid --- */
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  will-change: transform;
+}
+
+@keyframes aurora-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(8vw, 6vh) scale(1.15); }
+}
+@keyframes aurora-b {
+  0%, 100% { transform: translate(0, 0) scale(1.1); }
+  50% { transform: translate(-7vw, -5vh) scale(0.95); }
+}
+@keyframes aurora-c {
+  0%, 100% { transform: translate(0, 0) scale(0.95); }
+  50% { transform: translate(5vw, -7vh) scale(1.1); }
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgb(var(--t-border) / 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--t-border) / 0.35) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 35%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 35%, black 30%, transparent 75%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob {
+    animation: none !important;
+  }
+}
+
+/* --- custom cursor --- */
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  pointer-events: none;
+  border-radius: 9999px;
+  opacity: 0;
+}
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: rgb(var(--t-cyan));
+  box-shadow: 0 0 10px rgb(var(--t-cyan) / 0.8);
+}
+.cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid rgb(var(--t-cyan) / 0.55);
+  transition: opacity 0.2s ease;
+}
+
+@layer components {
+  /* shell prompt fragments: ojas@portfolio:~$ */
+  .prompt-user {
+    @apply text-term-cyan;
+  }
+  .prompt-path {
+    @apply text-term-blue;
+  }
+  .prompt-symbol {
+    @apply text-term-muted;
+  }
+
+  .cursor-block {
+    @apply inline-block w-[0.6em] translate-y-[0.12em] animate-blink bg-term-cyan;
+    height: 1.1em;
   }
 }

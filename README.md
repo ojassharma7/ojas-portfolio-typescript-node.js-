@@ -1,31 +1,30 @@
 # Ojas Sharma's Portfolio
 
-A modern, responsive portfolio website built with Next.js, Chakra UI, and Framer Motion.
+A dark, terminal-themed portfolio built with Next.js (App Router), Tailwind CSS, and Framer Motion — monospace fonts, shell-prompt styling, window-style cards, and an AI chatbot.
 
 ## Features
 
-- 🌓 Dark/Light mode toggle
-- 🎨 Modern and clean design
+- 🖥️ Riced-Linux / terminal aesthetic — shell prompts, window chrome, blinking cursors
+- ⌨️ Typewriter landing page with two doors: `[WORK]` and `[LIFE]`
+- 📊 `/work` — Rutgers Center for Gambling Studies research, experience timeline, projects
+- ⚽ `/life` — pro football in Germany, the ACL comeback, running dashboard
+- 🤖 `ask-ojas` — a site-wide terminal chatbot powered by OpenAI
+- 🎭 Smooth scroll-reveal animations
 - 📱 Fully responsive
-- ⚡ Fast and optimized performance
-- 🎭 Smooth animations and transitions
-- 📝 Blog section
-- 📬 Contact form
-- 🔗 Social media integration
 
 ## Tech Stack
 
-- [Next.js](https://nextjs.org/) - React framework
-- [Chakra UI](https://chakra-ui.com/) - Component library
-- [Framer Motion](https://www.framer.com/motion/) - Animation library
-- [TypeScript](https://www.typescriptlang.org/) - Type safety
-- [React Icons](https://react-icons.github.io/react-icons/) - Icon library
+- [Next.js](https://nextjs.org/) — React framework (App Router)
+- [Tailwind CSS](https://tailwindcss.com/) — styling
+- [Framer Motion](https://www.framer.com/motion/) — animations
+- [TypeScript](https://www.typescriptlang.org/) — type safety
+- [OpenAI](https://platform.openai.com/) — chatbot
 
 ## Getting Started
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/portfolio.git
+   git clone https://github.com/ojassharma7/ojas-portfolio-typescript-node.js-.git portfolio
    cd portfolio
    ```
 
@@ -34,41 +33,43 @@ A modern, responsive portfolio website built with Next.js, Chakra UI, and Framer
    npm install
    ```
 
-3. Run the development server:
+3. (Optional) Enable the chatbot — create `.env.local`:
+   ```bash
+   OPENAI_API_KEY=sk-...
+   ```
+
+4. Run the development server:
    ```bash
    npm run dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
 
 ```
 portfolio/
-├── public/          # Static files
-│   ├── app/        # Next.js app directory
-│   ├── components/ # React components
-│   ├── styles/     # Global styles
-│   └── utils/      # Utility functions
-├── package.json
-└── README.md
+├── public/              # Static files (photo, resume)
+├── src/
+│   ├── app/
+│   │   ├── page.tsx     # Landing — identity + [WORK]/[LIFE] doors
+│   │   ├── work/        # Professional page
+│   │   ├── life/        # Personal page
+│   │   └── api/chat/    # ask-ojas chatbot route (OpenAI)
+│   ├── components/      # Window, Typewriter, Reveal, Nav, ChatBot
+│   └── lib/profile.ts   # All site content + chatbot system prompt
+├── tailwind.config.ts
+└── package.json
 ```
 
 ## Customization
 
-1. Update personal information in the respective components
-2. Modify the theme in `src/app/providers.tsx`
-3. Add your own projects in `src/app/projects/page.tsx`
-4. Customize the blog posts in `src/app/blog/page.tsx`
+All content (bio, experience, projects, life facts) lives in `src/lib/profile.ts` — edit it once and both the pages and the chatbot system prompt update.
 
 ## Deployment
 
-The easiest way to deploy your portfolio is to use the [Vercel Platform](https://vercel.com/new).
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
+Deploy on [Vercel](https://vercel.com/new) — set `OPENAI_API_KEY` in the project's environment variables to enable the chatbot.
 
 ## Contact
 
-Feel free to reach out to me at your.email@example.com or connect with me on [LinkedIn](https://linkedin.com/in/yourusername).
+Reach me at [ojassharma16@gmail.com](mailto:ojassharma16@gmail.com) or connect on [LinkedIn](https://linkedin.com/in/ojassharma16).
