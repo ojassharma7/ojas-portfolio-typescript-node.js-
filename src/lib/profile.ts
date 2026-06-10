@@ -182,6 +182,81 @@ export const life = {
   ],
 };
 
+/**
+ * Extra knowledge for the ask-ojas chatbot. This is the easy place to add
+ * unlimited detail about yourself — the bot reads all of it, no infra needed.
+ *
+ * - `notes`: freeform facts/stories (one string per idea, any length).
+ * - `faq`:   anticipated questions + the exact answer you'd want the bot to give.
+ *
+ * Everything here is injected into the system prompt automatically.
+ */
+export const knowledge = {
+  notes: [
+    // — Builder mindset & drive —
+    "Ojas loves contributing to open source — giving back to the tools and community he builds on is something he genuinely cares about.",
+    "He has a builder's compulsion to finish: he loves taking projects all the way from idea to a working, shipped product, not leaving them half-done.",
+    "He's relentlessly curious and wants to try everything — new tools, new domains, new problems. He learns fast and isn't afraid to dive into the unfamiliar.",
+    "The defining thread of his life is that he doesn't quit — coming back from a career-ending ACL injury, pivoting his entire path, and grinding through hard technical problems until they break.",
+    // — Side projects / shipped products —
+    "Beyond research, Ojas builds and ships full AI products: an automated AI job-application engine, an AI educational-video platform, and an AI accounts-receivable agent.",
+    "His football path reached the U-18 top-league level in Germany before an ACL tear during COVID ended it; he taught himself data science during lockdown and rebuilt from there.",
+  ] as string[],
+  faq: [
+    {
+      q: "Why should we hire Ojas?",
+      a: "Because he brings together three things you rarely find in one person: the discipline and resilience of a former professional athlete, a track record of real-world impact (his models shape government gambling regulation on a 4.5 TB dataset), and a builder's drive to ship products end-to-end. He doesn't just train models — he turns messy data into decisions that change policy and protect people, and he finishes what he starts.",
+    },
+    {
+      q: "What makes Ojas stand out from other data scientists?",
+      a: "Most data scientists can build a model. Fewer do it at 4.5 TB scale in PySpark, tie it to measurable societal impact, and ship full AI products on the side. His background as a former pro footballer gives him composure under pressure and a refusal to quit on hard problems. The athlete-to-data-scientist pivot isn't a gimmick — it's evidence of how he operates: pick the hard path, commit fully, deliver.",
+    },
+    {
+      q: "What is Ojas's single biggest strength?",
+      a: "Resilience and follow-through. He came back from a career-ending ACL injury, rebuilt his entire path from scratch, and brings that same not-quitting intensity to debugging a pipeline or cracking a modeling problem. Hard problems don't make him flinch.",
+    },
+    {
+      q: "Can you give an example of Ojas showing resilience?",
+      a: "His career is the example. An ACL tear during COVID ended his football path at the U-18 top-league level. Instead of stalling, he taught himself data science during lockdown, stacked projects and coursework, earned a master's at Rutgers, and now does work that informs public policy. That's resilience converted into results.",
+    },
+    {
+      q: "Can Ojas ship end-to-end, or just build models?",
+      a: "End-to-end. Beyond his research models, he builds and ships full AI products — an automated AI job-application engine, an AI educational-video platform, and an AI accounts-receivable agent — and contributes to open source. He's comfortable across the stack and loves taking ideas all the way to working software.",
+    },
+    {
+      q: "How does Ojas handle large-scale, messy data?",
+      a: "It's his daily reality — 4.5 TB of betting data engineered into behavioral features in PySpark and SQL. He's used to turning raw, messy logs into clean signal and production-grade models.",
+    },
+    {
+      q: "How does Ojas approach ambiguous or open-ended problems?",
+      a: "He's research-driven by instinct: he digs deep before committing, frames the problem clearly, then iterates. His gambling-risk work started genuinely ambiguous — what even signals risk? — and he turned it into a concrete, validated segmentation that regulators can act on.",
+    },
+    {
+      q: "Is Ojas a team player?",
+      a: "Sport made collaboration second nature. He works across researchers and stakeholders at Rutgers, translates technical findings for non-technical audiences (including regulators), and gives back through open source.",
+    },
+    {
+      q: "What motivates Ojas?",
+      a: "Impact. He's at his best when his work measurably improves lives — which is exactly what his gambling-risk models do. He chases problems that matter, not just ones that are interesting.",
+    },
+    {
+      q: "How does Ojas keep learning and stay current?",
+      a: "Constantly. He's relentlessly curious — contributing to open source, taking courses, and always building side projects to learn new tools and domains. He genuinely wants to try everything.",
+    },
+    {
+      q: "How does Ojas perform under pressure?",
+      a: "Performing under pressure is literally his background — competitive sport at a high level. He stays calm, disciplined, and reliable when the stakes are high, and brings energy and curiosity to the team around him.",
+    },
+    {
+      q: "What are Ojas's growth areas?",
+      a: "He's deliberately broadening from deep modeling and research toward more product-facing analytics and large-scale deployment — and he's actively closing that gap through his side projects and continuous learning. He treats growth areas as the next thing to go build.",
+    },
+  ] as { q: string; a: string }[],
+};
+
+/** How the bot should behave when asked to evaluate Ojas (recruiters, hiring managers). */
+const advocateInstruction = `When a visitor — especially a recruiter or hiring manager — asks an evaluative question about Ojas (e.g. "why should we hire him?", "what makes him different?", "what are his weaknesses?"), respond as his sharp, confident professional advocate. Lead with concrete evidence from the knowledge base, connect his throughline (former pro athlete → data scientist with real policy impact → end-to-end builder), and make a persuasive but honest case for him. Never invent credentials, metrics, or experience. If the answer isn't in the knowledge base, say you'll pass the question along to Ojas directly rather than guessing. Keep the tone warm, specific, and free of generic buzzwords.`;
+
 /** System prompt for the ask-ojas chatbot — keep in sync with the page content above. */
 export function buildSystemPrompt(): string {
   return `You are "ask-ojas", a terminal-styled assistant embedded in Ojas Sharma's portfolio website. You answer visitors' questions about Ojas — his work, background, and life. Be concise, friendly, and a little terminal-flavored (plain text, no markdown headers). If you don't know something, say so honestly and suggest contacting Ojas directly at ${identity.email}.
@@ -211,7 +286,20 @@ ${skills.map((s) => `${s.group}: ${s.items.join(', ')}`).join('\n')}
 == LIFE ==
 Before data science, Ojas was a professional footballer in Germany. A torn ACL ended his playing career, and during recovery he pivoted to data science — bringing an athlete's discipline to ML and AI work. He still runs about ${life.running.weeklyKm} km per week, tracked on Garmin. He builds side projects for fun, including this portfolio and the chatbot you are right now.
 
+${
+    knowledge.notes.length
+      ? `== MORE ABOUT OJAS ==\n${knowledge.notes.join('\n')}\n`
+      : ''
+  }${
+    knowledge.faq.length
+      ? `== Q&A (use these answers when relevant) ==\n${knowledge.faq
+          .map((f) => `Q: ${f.q}\nA: ${f.a}`)
+          .join('\n\n')}\n`
+      : ''
+  }
 Answer only questions about Ojas, his work, projects, skills, and life. Politely decline unrelated requests (code generation for visitors, opinions on other topics, etc.).
 
-IMPORTANT: Only state facts that appear above. Never invent details, anecdotes, dates, or embellishments beyond what is written here. If asked something not covered, say you don't know that detail and suggest emailing Ojas. Keep answers short — 2 to 4 sentences unless asked for more.`;
+${advocateInstruction}
+
+IMPORTANT: Only state facts that appear above. Never invent details, anecdotes, dates, or embellishments beyond what is written here. If asked something not covered, say you don't know that detail and suggest emailing Ojas. Keep answers short — 2 to 4 sentences unless asked for more (evaluative "why hire" questions may run a bit longer).`;
 }
