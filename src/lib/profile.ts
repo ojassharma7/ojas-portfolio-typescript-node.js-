@@ -9,6 +9,7 @@ export const identity = {
   github: 'https://github.com/ojassharma7',
   linkedin: 'https://www.linkedin.com/in/ojassharma16',
   x: 'https://x.com/OjasSha92624851',
+  strava: 'https://www.strava.com/athletes/141478102',
   /** ISO date of birth — drives the live age counter on the landing page. */
   born: '2001-10-16',
   resume: '/Resume_Ojas_Sharma.pdf',

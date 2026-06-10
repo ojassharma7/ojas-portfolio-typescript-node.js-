@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { FaStrava } from 'react-icons/fa6';
 import CountUp from '@/components/CountUp';
+import { identity } from '@/lib/profile';
 import type { PacePoint, StravaData, Totals } from '@/lib/strava';
 
 const ORANGE = '#FC4C02';
@@ -134,20 +136,32 @@ export default function StravaDashboard({ fallback }: { fallback: React.ReactNod
 
   return (
     <div className="space-y-7">
-      {/* period tabs */}
-      <div className="inline-flex rounded-lg border border-term-border bg-term-bg p-0.5 text-xs">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setPeriod(tab.key)}
-            className={`rounded-md px-3 py-1.5 transition-colors ${
-              period === tab.key ? 'text-term-bg' : 'text-term-muted hover:text-term-text'
-            }`}
-            style={period === tab.key ? { backgroundColor: ORANGE } : undefined}
-          >
-            {tab.label}
-          </button>
-        ))}
+      {/* period tabs + profile link */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="inline-flex rounded-lg border border-term-border bg-term-bg p-0.5 text-xs">
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setPeriod(tab.key)}
+              className={`rounded-md px-3 py-1.5 transition-colors ${
+                period === tab.key ? 'text-term-bg' : 'text-term-muted hover:text-term-text'
+              }`}
+              style={period === tab.key ? { backgroundColor: ORANGE } : undefined}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+        <a
+          href={identity.strava}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-bold transition-all hover:-translate-y-0.5"
+          style={{ color: ORANGE, borderColor: `${ORANGE}66` }}
+        >
+          <FaStrava size={14} />
+          follow on strava
+        </a>
       </div>
 
       {/* headline stats — swap + re-animate per period */}
@@ -244,12 +258,15 @@ export default function StravaDashboard({ fallback }: { fallback: React.ReactNod
 
       {/* attribution */}
       <div className="flex items-center justify-between text-[10px] text-term-muted">
-        <span
-          className="rounded px-2 py-0.5 font-bold tracking-wide text-term-bg"
+        <a
+          href={identity.strava}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 rounded px-2 py-0.5 font-bold tracking-wide text-term-bg transition-opacity hover:opacity-90"
           style={{ backgroundColor: ORANGE }}
         >
-          ▲ POWERED BY STRAVA
-        </span>
+          <FaStrava size={11} /> POWERED BY STRAVA
+        </a>
         <span>updated {new Date(data.updatedAt).toLocaleDateString('en-US')}</span>
       </div>
     </div>
