@@ -13,11 +13,24 @@ const GREETING =
 
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [maximized, setMaximized] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // red: close + wipe the conversation (next open starts fresh)
+  const handleClose = () => {
+    setIsOpen(false);
+    setMaximized(false);
+    setMessages([]);
+    setInput('');
+  };
+  // green: just hide the window — conversation is kept for next open
+  const handleMinimize = () => setIsOpen(false);
+  // yellow: toggle a roomier size (not fullscreen)
+  const handleMaximize = () => setMaximized((v) => !v);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -75,12 +88,43 @@ export default function ChatBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
             transition={{ duration: 0.18 }}
-            className="fixed bottom-20 right-5 z-50 flex h-[min(560px,70vh)] w-[min(400px,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-lg border border-term-border bg-term-surface shadow-[0_16px_48px_rgba(0,0,0,0.6)]"
+            className={`fixed bottom-20 right-5 z-50 flex flex-col overflow-hidden rounded-lg border border-term-border bg-term-surface shadow-[0_16px_48px_rgba(0,0,0,0.6)] transition-[width,height] duration-200 ${
+              maximized
+                ? 'h-[min(760px,88vh)] w-[min(620px,calc(100vw-2.5rem))]'
+                : 'h-[min(560px,70vh)] w-[min(400px,calc(100vw-2.5rem))]'
+            }`}
           >
             <div className="flex items-center gap-2 border-b border-term-border bg-term-raised px-4 py-2.5">
-              <span className="h-3 w-3 rounded-full bg-term-red/80" />
-              <span className="h-3 w-3 rounded-full bg-term-yellow/80" />
-              <span className="h-3 w-3 rounded-full bg-term-green/80" />
+              <button
+                onClick={handleClose}
+                aria-label="Close and clear conversation"
+                title="close + new chat"
+                className="group flex h-3 w-3 items-center justify-center rounded-full bg-term-red/80 transition-transform hover:scale-110"
+              >
+                <span className="text-[7px] font-bold leading-none text-term-bg opacity-0 group-hover:opacity-100">
+                  ✕
+                </span>
+              </button>
+              <button
+                onClick={handleMaximize}
+                aria-label={maximized ? 'Restore size' : 'Maximize'}
+                title={maximized ? 'restore' : 'maximize'}
+                className="group flex h-3 w-3 items-center justify-center rounded-full bg-term-yellow/80 transition-transform hover:scale-110"
+              >
+                <span className="text-[7px] font-bold leading-none text-term-bg opacity-0 group-hover:opacity-100">
+                  {maximized ? '−' : '+'}
+                </span>
+              </button>
+              <button
+                onClick={handleMinimize}
+                aria-label="Minimize (keep conversation)"
+                title="hide (keeps chat)"
+                className="group flex h-3 w-3 items-center justify-center rounded-full bg-term-green/80 transition-transform hover:scale-110"
+              >
+                <span className="text-[7px] font-bold leading-none text-term-bg opacity-0 group-hover:opacity-100">
+                  –
+                </span>
+              </button>
               <span className="ml-3 text-xs text-term-muted">ask-ojas — interactive session</span>
             </div>
 
