@@ -90,6 +90,21 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: 'ReferrAI — AI Job & Referral Engine',
+    file: 'referrai.md',
+    github:
+      'https://github.com/ojassharma7/-ReferrAI-AI-Job-Engine-Automated-Referrals-Outreach-Tracking',
+    stack: ['n8n', 'Gemini AI', 'Google Sheets', 'Hunter.io', 'Gmail API'],
+    description:
+      'A fully automated referral-request workflow that finds contacts, writes tailored outreach, and tracks responses end-to-end.',
+    details: [
+      'Discovers relevant contacts via Hunter.io and Jobrights.io for each target role.',
+      'Drafts personalized referral emails with Gemini AI, tuned to the job description.',
+      'Generates customized resumes and cover letters per posting, then sends via Gmail.',
+      'Orchestrated in n8n with Google Sheets as the tracker for outreach and replies.',
+    ],
+  },
+  {
     title: 'Advanced RAG Pipeline for Question Answering',
     file: 'rag-pipeline.md',
     github: 'https://github.com/ojassharma7/RAG-Based-LLM-Application',
@@ -199,7 +214,7 @@ export const knowledge = {
     "He's relentlessly curious and wants to try everything — new tools, new domains, new problems. He learns fast and isn't afraid to dive into the unfamiliar.",
     "The defining thread of his life is that he doesn't quit — coming back from a career-ending ACL injury, pivoting his entire path, and grinding through hard technical problems until they break.",
     // — Side projects / shipped products —
-    "Beyond research, Ojas builds and ships full AI products: an automated AI job-application engine, an AI educational-video platform, and an AI accounts-receivable agent.",
+    "Beyond research, Ojas builds and ships full AI products: an automated AI job-application engine and an AI accounts-receivable agent.",
     "His football path reached the U-18 top-league level in Germany before an ACL tear during COVID ended it; he taught himself data science during lockdown and rebuilt from there.",
   ] as string[],
   faq: [
@@ -221,7 +236,7 @@ export const knowledge = {
     },
     {
       q: "Can Ojas ship end-to-end, or just build models?",
-      a: "End-to-end. Beyond his research models, he builds and ships full AI products — an automated AI job-application engine, an AI educational-video platform, and an AI accounts-receivable agent — and contributes to open source. He's comfortable across the stack and loves taking ideas all the way to working software.",
+      a: "End-to-end. Beyond his research models, he builds and ships full AI products — an automated AI job-application engine and an AI accounts-receivable agent — and contributes to open source. He's comfortable across the stack and loves taking ideas all the way to working software.",
     },
     {
       q: "How does Ojas handle large-scale, messy data?",
