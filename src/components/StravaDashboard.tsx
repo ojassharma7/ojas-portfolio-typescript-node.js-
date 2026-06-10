@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FaStrava } from 'react-icons/fa6';
 import CountUp from '@/components/CountUp';
-import { identity } from '@/lib/profile';
+import { identity, life } from '@/lib/profile';
 import type { PacePoint, StravaData, Totals } from '@/lib/strava';
 
 const ORANGE = '#FC4C02';
@@ -183,6 +183,16 @@ export default function StravaDashboard({ fallback }: { fallback: React.ReactNod
         <span className="rounded border border-term-border bg-term-bg px-3 py-1.5 text-term-muted">
           {year} avg pace <span style={{ color: ORANGE }} className="font-bold">{data.avgPace}/km</span>
         </span>
+        {life.running.prs.fiveK && (
+          <span className="rounded border border-term-border bg-term-bg px-3 py-1.5 text-term-muted">
+            5K PR <span style={{ color: ORANGE }} className="font-bold">{life.running.prs.fiveK}</span>
+          </span>
+        )}
+        {life.running.prs.tenK && (
+          <span className="rounded border border-term-border bg-term-bg px-3 py-1.5 text-term-muted">
+            10K PR <span style={{ color: ORANGE }} className="font-bold">{life.running.prs.tenK}</span>
+          </span>
+        )}
       </div>
 
       {/* weekly mileage */}

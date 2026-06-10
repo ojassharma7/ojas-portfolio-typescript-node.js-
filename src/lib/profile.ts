@@ -190,6 +190,8 @@ export const life = {
     weeks: [16, 21, 18, 23, 19, 24, 21, 20],
     source: 'Strava',
     note: 'The knee is rebuilt and the engine still runs — tracked on Strava, synced live below.',
+    // personal records (manual — Strava's API doesn't expose these cleanly). Leave '' to hide.
+    prs: { fiveK: '19:48', tenK: '44:59' },
   },
   sideBuilds: [
     { name: 'ask-ojas', desc: 'The terminal chatbot on this very site — ask it anything about me.' },
