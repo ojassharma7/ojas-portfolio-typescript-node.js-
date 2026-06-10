@@ -25,11 +25,23 @@ const config: Config = {
       },
       animation: {
         blink: 'blink 1.1s step-end infinite',
+        'glow-pulse': 'glow-pulse 2.8s ease-in-out infinite',
+        'beam-sweep': 'beam-sweep 4.5s ease-in-out infinite',
       },
       keyframes: {
         blink: {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0' },
+        },
+        'glow-pulse': {
+          '0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
+          '50%': { opacity: '0.65', transform: 'scale(1.18)' },
+        },
+        'beam-sweep': {
+          '0%': { opacity: '0', transform: 'translate(-70px,-44px) scaleX(0.5)' },
+          '20%': { opacity: '0.8' },
+          '70%': { opacity: '0.8' },
+          '100%': { opacity: '0', transform: 'translate(6px,4px) scaleX(1.1)' },
         },
       },
     },
