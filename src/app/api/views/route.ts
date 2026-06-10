@@ -45,7 +45,21 @@ async function fileIncrement(): Promise<number> {
   return views;
 }
 
-export async function GET() {
+export async function GET(req: Request) {
+  // ?debug=1 reports whether the deployment found Redis creds — never leaks the values
+  if (new URL(req.url).searchParams.get('debug') === '1') {
+    return NextResponse.json({
+      redisConfigured: useRedis,
+      sawEnv: {
+        KV_REST_API_URL: Boolean(process.env.KV_REST_API_URL),
+        KV_REST_API_TOKEN: Boolean(process.env.KV_REST_API_TOKEN),
+        UPSTASH_REDIS_REST_URL: Boolean(process.env.UPSTASH_REDIS_REST_URL),
+        UPSTASH_REDIS_REST_TOKEN: Boolean(process.env.UPSTASH_REDIS_REST_TOKEN),
+        REDIS_URL: Boolean(process.env.REDIS_URL),
+        KV_URL: Boolean(process.env.KV_URL),
+      },
+    });
+  }
   try {
     const views = useRedis ? await redis(['get', VIEW_KEY]) : await fileRead();
     return NextResponse.json({ views });
