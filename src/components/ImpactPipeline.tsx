@@ -1,17 +1,20 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import ClusterScatter from '@/components/ClusterScatter';
+import WorkStory from '@/components/WorkStory';
 import { rutgers } from '@/lib/profile';
 
 /**
- * The Rutgers work, shown instead of told: an animated modeling pipeline
- * (ingest -> cluster -> classify -> detect -> deploy) plus measured-impact meters.
+ * The Rutgers work: a plain-language explainer (problem -> approach -> impact)
+ * for any reader, then the technical pipeline and measured-impact meters.
  */
 export default function ImpactPipeline() {
   return (
-    <div className="space-y-8">
-      {/* pipeline diagram */}
+    <div className="space-y-10">
+      {/* plain-english story + validating quote */}
+      <WorkStory />
+
+      {/* technical pipeline diagram */}
       <div>
         <p className="mb-3 text-xs text-term-muted">
           <span className="prompt-symbol">$ </span>cat pipeline.yaml{' '}
@@ -64,9 +67,6 @@ export default function ImpactPipeline() {
           ))}
         </div>
       </div>
-
-      {/* clustering result visualization */}
-      <ClusterScatter />
 
       {/* measured impact meters */}
       <div>

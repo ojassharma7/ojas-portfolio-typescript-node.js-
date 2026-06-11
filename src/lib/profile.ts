@@ -30,6 +30,32 @@ export const rutgers = {
   url: 'https://socialwork.rutgers.edu/centers/center-gambling-studies',
   policy:
     'directly influencing multi-billion-dollar policy decisions — across the gambling industry and at the state level.',
+  /** plain-language story of the work, for any reader — technical or not */
+  story: [
+    {
+      tag: 'the problem',
+      accent: 'red',
+      text: 'Millions gamble online, and a hidden cohort quietly spirals into dangerous overspending — yet no platform is required to catch them. Untreated, it cascades into bankruptcy, crime, and worse.',
+    },
+    {
+      tag: 'what I build',
+      accent: 'cyan',
+      text: 'ML models that read behavioral fingerprints — bigger bets, rising frequency, a growing share of income spent — across 13.6 billion real betting events, to pinpoint the exact tipping point where someone crosses into high-risk.',
+    },
+    {
+      tag: 'the impact',
+      accent: 'green',
+      text: 'At-risk players get flagged early for support — resources, mandatory cooling-off periods — and the models hand state regulators the evidence to shape policy and require platforms to adopt safeguards.',
+    },
+  ],
+  /** third-party validation — Rutgers School of Social Work AI feature */
+  feature: {
+    quote:
+      'Machine learning can trace these patterns to find a tipping point that places individuals into a risk category. This is virtually impossible to do with human calculations alone.',
+    author: 'Dr. Lia Nower',
+    role: 'Director, Center for Gambling Studies',
+    source: 'Rutgers School of Social Work — feature on AI for social change',
+  },
   /** the modeling workflow, rendered as a pipeline diagram on /work (in correct ML order) */
   pipeline: [
     { cmd: 'ingest', title: '4.5 TB · 13.6B events', sub: 'PySpark + SQL across 7 operators' },
