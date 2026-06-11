@@ -2,6 +2,7 @@
 
 import ContinueFooter from '@/components/ContinueFooter';
 import CountUp from '@/components/CountUp';
+import GitHubShowcase from '@/components/GitHubShowcase';
 import Highlight from '@/components/Highlight';
 import ImpactPipeline from '@/components/ImpactPipeline';
 import Reveal from '@/components/Reveal';
@@ -189,11 +190,26 @@ export default function Work() {
         </div>
       </section>
 
-      {/* skills */}
+      {/* github — live activity */}
       <section>
         <Reveal>
           <SectionHeader
             index="03"
+            label="github"
+            cmd="gh activity"
+            sub="live from github — what I've been building lately."
+          />
+        </Reveal>
+        <Reveal>
+          <GitHubShowcase />
+        </Reveal>
+      </section>
+
+      {/* skills */}
+      <section>
+        <Reveal>
+          <SectionHeader
+            index="04"
             label="stack"
             cmd="cat skills.yaml"
             sub="the tools I reach for, by category."
