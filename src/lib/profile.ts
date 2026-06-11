@@ -27,14 +27,16 @@ export const rutgers = {
     { value: '13.6 B', label: 'records analyzed' },
     { value: '1 M+', label: 'gamblers risk-profiled' },
   ],
+  url: 'https://socialwork.rutgers.edu/centers/center-gambling-studies',
   policy:
     'directly influencing multi-billion-dollar policy decisions — across the gambling industry and at the state level.',
-  /** the modeling workflow, rendered as a pipeline diagram on /work */
+  /** the modeling workflow, rendered as a pipeline diagram on /work (in correct ML order) */
   pipeline: [
-    { cmd: 'ingest', title: '4.5 TB · 13.6B events', sub: 'PySpark + SQL feature engineering across 7 operators' },
+    { cmd: 'ingest', title: '4.5 TB · 13.6B events', sub: 'PySpark + SQL across 7 operators' },
+    { cmd: 'preprocess', title: 'clean · normalize · reduce', sub: 'missing-value handling, Z-Score & IQR filtering, PCA (95% variance)' },
+    { cmd: 'engineer', title: 'behavioral features', sub: 'deposit, session & wagering signals per gambler' },
     { cmd: 'cluster', title: 'K-Means · GMM', sub: '1M+ gamblers segmented · silhouette 0.79' },
-    { cmd: 'classify', title: 'SVM · LightGBM', sub: 'multi-class risk models, A/B-validated' },
-    { cmd: 'detect', title: 'Z-Score · IQR · PCA', sub: 'irregular deposits · 95% variance retained' },
+    { cmd: 'classify', title: 'SVM · LightGBM', sub: 'multi-class risk · A/B-validated' },
     { cmd: 'deploy', title: 'interventions → policy', sub: 'industry & state-level regulation' },
   ],
   /** measured outcomes, rendered as animated meters on /work */
@@ -70,6 +72,7 @@ export type Experience = {
   location: string;
   stack: string[];
   bullets: string[];
+  url?: string;
 };
 
 export const experiences: Experience[] = [
@@ -80,6 +83,7 @@ export const experiences: Experience[] = [
     location: rutgers.location,
     stack: rutgers.stack,
     bullets: rutgers.highlights,
+    url: rutgers.url,
   },
   {
     company: 'Omalco Extrusion',

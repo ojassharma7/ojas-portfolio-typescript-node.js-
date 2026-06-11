@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import ClusterScatter from '@/components/ClusterScatter';
 import { rutgers } from '@/lib/profile';
 
 /**
@@ -63,6 +64,9 @@ export default function ImpactPipeline() {
           ))}
         </div>
       </div>
+
+      {/* clustering result visualization */}
+      <ClusterScatter />
 
       {/* measured impact meters */}
       <div>

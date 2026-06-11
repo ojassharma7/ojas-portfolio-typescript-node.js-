@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import CountUp from '@/components/CountUp';
+import Highlight from '@/components/Highlight';
 import ImpactPipeline from '@/components/ImpactPipeline';
 import Reveal from '@/components/Reveal';
 import Window from '@/components/Window';
@@ -42,7 +43,17 @@ export default function Work() {
       <Reveal>
         <Window title="~/work/rutgers — center-for-gambling-studies.md">
           <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 className="text-xl font-bold text-term-cyan">{rutgers.org}</h2>
+            <a
+              href={rutgers.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group text-xl font-bold text-term-cyan underline decoration-term-cyan/30 underline-offset-4 transition-colors hover:decoration-term-cyan"
+            >
+              {rutgers.org}
+              <span className="ml-1 text-sm text-term-muted transition-colors group-hover:text-term-cyan">
+                ↗
+              </span>
+            </a>
             <span className="text-xs text-term-muted">{rutgers.period}</span>
           </div>
           <p className="text-sm text-term-muted">
@@ -97,13 +108,27 @@ export default function Work() {
                 <p className="text-xs text-term-muted">{exp.period}</p>
                 <h3 className="mt-1 font-bold text-term-text">{exp.role}</h3>
                 <p className="text-sm text-term-blue">
-                  {exp.company} · <span className="text-term-muted">{exp.location}</span>
+                  {exp.url ? (
+                    <a
+                      href={exp.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline decoration-term-blue/30 underline-offset-2 transition-colors hover:text-term-cyan hover:decoration-term-cyan"
+                    >
+                      {exp.company} ↗
+                    </a>
+                  ) : (
+                    exp.company
+                  )}{' '}
+                  · <span className="text-term-muted">{exp.location}</span>
                 </p>
                 <ul className="mt-3 space-y-2 text-sm leading-relaxed text-term-text/85">
                   {exp.bullets.map((b, j) => (
                     <li key={j} className="flex gap-2">
                       <span className="shrink-0 text-term-cyan">▸</span>
-                      <span>{b}</span>
+                      <span>
+                        <Highlight>{b}</Highlight>
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -243,9 +268,15 @@ export default function Work() {
             >
               [github]
             </a>
+            <a
+              href={`tel:${identity.phone.replace(/[^\d+]/g, '')}`}
+              className="rounded border border-term-border px-4 py-2 text-term-text transition-all hover:-translate-y-0.5 hover:border-term-blue/60 hover:text-term-blue"
+            >
+              [call]
+            </a>
           </div>
           <p className="mt-5 text-xs text-term-muted">
-            {identity.email} · {identity.location}
+            {identity.email} · {identity.phone} · {identity.location}
           </p>
         </Window>
       </Reveal>
