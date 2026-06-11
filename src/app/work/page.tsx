@@ -5,6 +5,7 @@ import CountUp from '@/components/CountUp';
 import Highlight from '@/components/Highlight';
 import ImpactPipeline from '@/components/ImpactPipeline';
 import Reveal from '@/components/Reveal';
+import SectionHeader from '@/components/SectionHeader';
 import Window from '@/components/Window';
 import { experiences, identity, projects, rutgers, skills } from '@/lib/profile';
 
@@ -95,10 +96,12 @@ export default function Work() {
       {/* experience timeline */}
       <section>
         <Reveal>
-          <h2 className="mb-8 text-2xl font-bold text-term-text">
-            <span className="prompt-symbol">$ </span>git log{' '}
-            <span className="text-term-cyan/80">--experience</span>
-          </h2>
+          <SectionHeader
+            index="01"
+            label="experience"
+            cmd="git log --experience"
+            sub="where I've worked and what I shipped."
+          />
         </Reveal>
         <div className="relative ml-2 space-y-10 border-l border-term-border pl-8">
           {experiences.map((exp, i) => (
@@ -146,10 +149,12 @@ export default function Work() {
       {/* projects */}
       <section>
         <Reveal>
-          <h2 className="mb-8 text-2xl font-bold text-term-text">
-            <span className="prompt-symbol">$ </span>ls{' '}
-            <span className="text-term-cyan/80">~/projects/</span>
-          </h2>
+          <SectionHeader
+            index="02"
+            label="projects"
+            cmd="ls ~/projects/"
+            sub="things I've built end-to-end, on my own time."
+          />
         </Reveal>
         <div className="grid gap-6 md:grid-cols-2">
           {projects.map((p, i) => (
@@ -187,10 +192,12 @@ export default function Work() {
       {/* skills */}
       <section>
         <Reveal>
-          <h2 className="mb-8 text-2xl font-bold text-term-text">
-            <span className="prompt-symbol">$ </span>cat{' '}
-            <span className="text-term-cyan/80">skills.yaml</span>
-          </h2>
+          <SectionHeader
+            index="03"
+            label="stack"
+            cmd="cat skills.yaml"
+            sub="the tools I reach for, by category."
+          />
         </Reveal>
         <div className="overflow-hidden rounded-lg border border-term-border bg-term-surface">
           {skills.map((s, i) => {
