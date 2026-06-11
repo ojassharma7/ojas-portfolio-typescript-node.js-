@@ -11,10 +11,43 @@ const mono = JetBrains_Mono({
   variable: '--font-mono',
 });
 
+const SITE_URL = 'https://ojassharma.vercel.app';
+const TITLE = 'Ojas Sharma — Data Scientist & AI Engineer';
+const DESCRIPTION =
+  'Data Scientist & AI Engineer, ex-pro footballer. Modeling 13.6B+ records at Rutgers (informing multi-billion-dollar policy) and shipping LLM / RAG systems.';
+
 export const metadata: Metadata = {
-  title: 'Ojas Sharma — Data Scientist & AI Engineer',
-  description:
-    'Data Scientist & AI Engineer, ex-pro footballer. Modeling billions of records at Rutgers and building LLM systems.',
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  keywords: [
+    'Ojas Sharma',
+    'Data Scientist',
+    'AI Engineer',
+    'Machine Learning',
+    'LLM',
+    'RAG',
+    'Rutgers',
+    'PySpark',
+    'data science portfolio',
+  ],
+  authors: [{ name: 'Ojas Sharma', url: SITE_URL }],
+  creator: 'Ojas Sharma',
+  alternates: { canonical: SITE_URL },
+  openGraph: {
+    type: 'website',
+    url: SITE_URL,
+    siteName: 'ojas@portfolio',
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+    creator: '@OjasSha92624851',
+  },
+  icons: { icon: '/favicon.ico' },
 };
 
 export default function RootLayout({
