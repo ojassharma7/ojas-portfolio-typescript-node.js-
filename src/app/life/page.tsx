@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import PhotoGrid from '@/components/PhotoGrid';
 import Reveal from '@/components/Reveal';
 import RunningChart from '@/components/RunningChart';
 import StravaDashboard from '@/components/StravaDashboard';
@@ -131,19 +132,9 @@ export default function Life() {
             <span className="text-term-muted">~/photos/ --montage</span>
           </h2>
         </Reveal>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-          {['pitch-days.jpg', 'long-run.jpg', 'new-jersey.jpg', 'matchday.jpg', 'trail.jpg', 'setup.jpg'].map(
-            (name, i) => (
-              <Reveal key={name} delay={(i % 3) * 0.08}>
-                <div className="flex aspect-square flex-col items-center justify-center rounded border border-dashed border-term-border bg-term-surface/50 text-center">
-                  <span className="text-2xl text-term-muted">⊞</span>
-                  <span className="mt-2 px-2 text-xs text-term-muted">{name}</span>
-                  <span className="mt-1 text-[10px] text-term-border">coming soon</span>
-                </div>
-              </Reveal>
-            )
-          )}
-        </div>
+        <Reveal>
+          <PhotoGrid photos={life.photos} />
+        </Reveal>
       </section>
 
       <Reveal>

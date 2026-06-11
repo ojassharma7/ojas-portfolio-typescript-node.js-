@@ -193,6 +193,14 @@ export const life = {
     // personal records (manual — Strava's API doesn't expose these cleanly). Leave '' to hide.
     prs: { fiveK: '19:48', tenK: '44:59' },
   },
+  photos: [
+    { src: '/photos/p1.jpg', caption: 'golden-hour miles' },
+    { src: '/photos/p2.jpg', caption: 'the trophy years' },
+    { src: '/photos/p3.jpg', caption: 'M.S. — Rutgers ’25' },
+    { src: '/photos/p4.jpg', caption: 'matchday' },
+    { src: '/photos/p5.jpg', caption: 'the setup' },
+    { src: '/photos/p6.jpg', caption: 'the why' },
+  ],
   sideBuilds: [
     { name: 'ask-ojas', desc: 'The terminal chatbot on this very site — ask it anything about me.' },
     { name: 'this portfolio', desc: 'Next.js + Tailwind + Framer Motion, riced like my Linux setup.' },
