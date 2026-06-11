@@ -25,8 +25,24 @@ export const rutgers = {
   stats: [
     { value: '4.5 TB', label: 'raw behavioral data' },
     { value: '13.6 B', label: 'records analyzed' },
-    { value: '7', label: 'gambling operators' },
-    { value: '1 M+', label: 'gamblers clustered' },
+    { value: '1 M+', label: 'gamblers risk-profiled' },
+  ],
+  policy:
+    'directly influencing multi-billion-dollar policy decisions — across the gambling industry and at the state level.',
+  /** the modeling workflow, rendered as a pipeline diagram on /work */
+  pipeline: [
+    { cmd: 'ingest', title: '4.5 TB · 13.6B events', sub: 'PySpark + SQL feature engineering across 7 operators' },
+    { cmd: 'cluster', title: 'K-Means · GMM', sub: '1M+ gamblers segmented · silhouette 0.79' },
+    { cmd: 'classify', title: 'SVM · LightGBM', sub: 'multi-class risk models, A/B-validated' },
+    { cmd: 'detect', title: 'Z-Score · IQR · PCA', sub: 'irregular deposits · 95% variance retained' },
+    { cmd: 'deploy', title: 'interventions → policy', sub: 'industry & state-level regulation' },
+  ],
+  /** measured outcomes, rendered as animated meters on /work */
+  impacts: [
+    { label: 'intervention effectiveness', display: '+33%', pct: 83 },
+    { label: 'early-risk identification', display: '+30%', pct: 75 },
+    { label: 'clustering silhouette score', display: '0.79', pct: 79 },
+    { label: 'high-risk gambler detection', display: '+6%', pct: 15 },
   ],
   stack: [
     'Python',
@@ -39,11 +55,11 @@ export const rutgers = {
     'A/B Testing',
   ],
   highlights: [
-    'Analyzing a 4.5 TB dataset of 13.6 billion records from seven gambling operators to identify high-risk gambling behaviors and build predictive models for early intervention.',
-    'Built K-Means & GMM clustering models classifying 1M+ gamblers by behavioral indicators (Silhouette Score 0.79).',
-    'A/B tested multi-class models (SVM, LightGBM, CatBoost), boosting intervention accuracy by 33%.',
-    'Outlier detection pipeline (Z-Score, IQR, PCA at 99% variance) for irregular deposit patterns.',
-    'Drove a 30% increase in early detection of risky financial behavior, informing state-level policy.',
+    'Engineered an in-depth analysis on a 4.5 TB dataset with 13.6 billion records from seven gambling operators, identifying high-risk gambler profiles to enable timely early interventions.',
+    'Built and deployed data-driven risk assessment models like K-Means and GMM clustering models to classify over 1 million gamblers based on behavioral indicators, achieving a Silhouette Score of 0.79, improving precision of regulatory policy insights.',
+    'Enhanced effectiveness of early gambling interventions by 33% through improved multi-class risk classification models (SVM, LightGBM), validated via A/B testing on intervention outcomes.',
+    'Monitored an outlier detection pipeline using Z-Score, IQR filtering, and PCA (95% variance retained) to detect irregular deposit patterns, enhancing the accuracy of fraud detection systems.',
+    'Accomplished high-risk gambler detection by 6% and boosted early-risk identification by 30%, influencing multi-billion-dollar policy decisions and state-level regulations.',
   ],
 };
 
@@ -72,10 +88,10 @@ export const experiences: Experience[] = [
     location: 'New Delhi, India',
     stack: ['Power BI', 'D3.js', 'PostgreSQL', 'Couchbase', 'Python', 'ARIMA', 'Prophet'],
     bullets: [
-      'Automated financial reporting and market analysis with Power BI and D3.js — business team efficiency up 80%, ETL runtime down 50%.',
-      'Built real-time data pipelines and time-series forecasting (ARIMA, Prophet) for dynamic market analysis.',
-      'Implemented hybrid data architectures and real-time dashboards on PostgreSQL, Couchbase, and D3.js.',
-      'Statistical analysis (regression, hypothesis testing) surfacing price elasticity, seasonal demand, and profitability shifts.',
+      'Automated financial reporting and market analysis using Power BI and D3.js, improving business team efficiency by 80% and reducing ETL job runtime by 50% through optimized reporting table logic.',
+      'Developed real-time data pipelines and applied time-series forecasting (ARIMA, Prophet) to predict sales and demand, driving strategic planning and inventory management.',
+      'Architected and deployed hybrid data storage solutions combining PostgreSQL and Couchbase, powering real-time dashboards with D3.js for up-to-the-minute market visualization and faster decision-making.',
+      'Leveraged linear regression and hypothesis testing to pinpoint seasonal demand fluctuations, directly informing pricing and inventory strategies, impacting 100+ products from the company’s offerings.',
     ],
   },
 ];
@@ -161,9 +177,11 @@ export const projects: Project[] = [
 ];
 
 export const skills = [
-  { group: 'AI / ML', items: ['LLMs', 'RAG', 'Fine-tuning (LoRA/QLoRA)', 'Deep Learning', 'NLP', 'Clustering', 'Vector DBs'] },
-  { group: 'Engineering', items: ['Python', 'PySpark', 'SQL', 'FastAPI', 'PostgreSQL', 'MongoDB', 'TypeScript'] },
-  { group: 'Cloud / Tooling', items: ['AWS', 'GCP', 'Docker', 'Airflow', 'Kafka', 'CI/CD', 'LangChain'] },
+  { group: 'languages', items: ['Python', 'PySpark', 'SQL', 'R', 'C++', 'C', 'Java', 'Flask', 'MATLAB'] },
+  { group: 'ml / dl', items: ['Statistical & Regression Analysis', 'Clustering Algorithms', 'Boosting / Bagging', 'Keras', 'PyTorch'] },
+  { group: 'databases / cloud', items: ['Big Data Analytics', 'MySQL', 'PostgreSQL', 'Hadoop', 'Snowflake', 'AWS', 'Vector DBs', 'Pinecone', 'LanceDB'] },
+  { group: 'nlp', items: ['LLMs', 'RAG', 'Text Preprocessing', 'Named Entity Recognition', 'Hugging Face', 'LangChain'] },
+  { group: 'data viz', items: ['Power BI', 'Tableau', 'GGPLOT2', 'Plotly', 'Seaborn'] },
 ];
 
 export const life = {

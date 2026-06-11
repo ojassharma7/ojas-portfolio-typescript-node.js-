@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import CountUp from '@/components/CountUp';
+import ImpactPipeline from '@/components/ImpactPipeline';
 import Reveal from '@/components/Reveal';
 import Window from '@/components/Window';
 import { experiences, identity, projects, rutgers, skills } from '@/lib/profile';
@@ -48,7 +49,7 @@ export default function Work() {
             {rutgers.role} · {rutgers.location}
           </p>
 
-          <div className="my-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="my-6 grid grid-cols-3 gap-3">
             {rutgers.stats.map((s) => (
               <div
                 key={s.label}
@@ -60,16 +61,19 @@ export default function Work() {
             ))}
           </div>
 
-          <ul className="space-y-2.5 text-sm leading-relaxed">
-            {rutgers.highlights.map((h, i) => (
-              <li key={i} className="flex gap-2">
-                <span className="shrink-0 text-term-cyan">▸</span>
-                <span>{h}</span>
-              </li>
-            ))}
-          </ul>
+          {/* policy impact banner */}
+          <div className="mb-7 rounded-md border border-term-cyan/40 bg-term-cyan/5 px-4 py-3 text-sm leading-relaxed">
+            <span className="font-bold text-term-cyan">▸ </span>
+            <span className="text-term-text">
+              directly influencing{' '}
+              <span className="font-bold text-term-cyan">multi-billion-dollar</span> policy
+              decisions — across the gambling industry and at the state level.
+            </span>
+          </div>
 
-          <div className="mt-5 flex flex-wrap gap-2">
+          <ImpactPipeline />
+
+          <div className="mt-7 flex flex-wrap gap-2">
             {rutgers.stack.map((t) => (
               <Tag key={t}>{t}</Tag>
             ))}
@@ -80,8 +84,9 @@ export default function Work() {
       {/* experience timeline */}
       <section>
         <Reveal>
-          <h2 className="mb-8 text-2xl font-bold">
-            <span className="prompt-symbol">$ </span>git log <span className="text-term-muted">--experience</span>
+          <h2 className="mb-8 text-2xl font-bold text-term-text">
+            <span className="prompt-symbol">$ </span>git log{' '}
+            <span className="text-term-cyan/80">--experience</span>
           </h2>
         </Reveal>
         <div className="relative ml-2 space-y-10 border-l border-term-border pl-8">
@@ -94,10 +99,10 @@ export default function Work() {
                 <p className="text-sm text-term-blue">
                   {exp.company} · <span className="text-term-muted">{exp.location}</span>
                 </p>
-                <ul className="mt-3 space-y-2 text-sm text-term-muted">
-                  {exp.bullets.slice(0, 3).map((b, j) => (
+                <ul className="mt-3 space-y-2 text-sm leading-relaxed text-term-text/85">
+                  {exp.bullets.map((b, j) => (
                     <li key={j} className="flex gap-2">
-                      <span className="shrink-0 text-term-border">-</span>
+                      <span className="shrink-0 text-term-cyan">▸</span>
                       <span>{b}</span>
                     </li>
                   ))}
@@ -116,8 +121,9 @@ export default function Work() {
       {/* projects */}
       <section>
         <Reveal>
-          <h2 className="mb-8 text-2xl font-bold">
-            <span className="prompt-symbol">$ </span>ls <span className="text-term-muted">~/projects/</span>
+          <h2 className="mb-8 text-2xl font-bold text-term-text">
+            <span className="prompt-symbol">$ </span>ls{' '}
+            <span className="text-term-cyan/80">~/projects/</span>
           </h2>
         </Reveal>
         <div className="grid gap-6 md:grid-cols-2">
@@ -125,8 +131,8 @@ export default function Work() {
             <Reveal key={p.title} delay={(i % 2) * 0.12}>
               <Window title={`~/projects/${p.file}`} className="h-full">
                 <h3 className="font-bold text-term-text">{p.title}</h3>
-                <p className="mt-2 text-sm text-term-muted">{p.description}</p>
-                <ul className="mt-3 space-y-1.5 text-sm text-term-muted">
+                <p className="mt-2 text-sm text-term-text/75">{p.description}</p>
+                <ul className="mt-3 space-y-1.5 text-sm text-term-text/85">
                   {p.details.map((d, j) => (
                     <li key={j} className="flex gap-2">
                       <span className="shrink-0 text-term-cyan">▸</span>
@@ -156,23 +162,45 @@ export default function Work() {
       {/* skills */}
       <section>
         <Reveal>
-          <h2 className="mb-8 text-2xl font-bold">
-            <span className="prompt-symbol">$ </span>which <span className="text-term-muted">--skills</span>
+          <h2 className="mb-8 text-2xl font-bold text-term-text">
+            <span className="prompt-symbol">$ </span>cat{' '}
+            <span className="text-term-cyan/80">skills.yaml</span>
           </h2>
         </Reveal>
-        <div className="grid gap-4 sm:grid-cols-3">
-          {skills.map((s, i) => (
-            <Reveal key={s.group} delay={i * 0.08}>
-              <div className="h-full rounded border border-term-border bg-term-surface p-4">
-                <h3 className="mb-3 text-sm font-bold text-term-purple"># {s.group}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {s.items.map((item) => (
-                    <Tag key={item}>{item}</Tag>
-                  ))}
+        <div className="overflow-hidden rounded-lg border border-term-border bg-term-surface">
+          {skills.map((s, i) => {
+            const accents = [
+              'text-term-cyan',
+              'text-term-purple',
+              'text-term-blue',
+              'text-term-yellow',
+              'text-term-green',
+            ];
+            const accent = accents[i % accents.length];
+            return (
+              <Reveal key={s.group} delay={i * 0.06}>
+                <div
+                  className={`flex flex-col gap-2.5 px-5 py-4 sm:flex-row sm:items-baseline ${
+                    i > 0 ? 'border-t border-term-border/60' : ''
+                  }`}
+                >
+                  <span className={`w-44 shrink-0 text-sm font-bold ${accent}`}>
+                    {s.group}:
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {s.items.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded border border-term-border bg-term-bg px-2.5 py-1 text-xs text-term-text/90 transition-all hover:-translate-y-0.5 hover:border-term-cyan/60 hover:text-term-cyan"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
