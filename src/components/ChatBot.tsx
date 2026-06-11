@@ -91,6 +91,13 @@ export default function ChatBot() {
     if (isOpen) inputRef.current?.focus();
   }, [isOpen]);
 
+  // let the command palette open the chat
+  useEffect(() => {
+    const open = () => setIsOpen(true);
+    window.addEventListener('ojas:open-chat', open);
+    return () => window.removeEventListener('ojas:open-chat', open);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const userMessage = input.trim();

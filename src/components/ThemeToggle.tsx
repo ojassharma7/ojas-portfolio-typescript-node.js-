@@ -6,18 +6,21 @@ import { useEffect, useState } from 'react';
 export default function ThemeToggle() {
   const [light, setLight] = useState(false);
 
-  useEffect(() => {
-    setLight(document.documentElement.classList.contains('light'));
-  }, []);
-
   const toggle = () => {
-    const next = !light;
+    const next = !document.documentElement.classList.contains('light');
     setLight(next);
     document.documentElement.classList.toggle('light', next);
     try {
       localStorage.setItem('theme', next ? 'light' : 'dark');
     } catch {}
   };
+
+  useEffect(() => {
+    setLight(document.documentElement.classList.contains('light'));
+    // let the command palette toggle the theme too
+    window.addEventListener('ojas:toggle-theme', toggle);
+    return () => window.removeEventListener('ojas:toggle-theme', toggle);
+  }, []);
 
   return (
     <button

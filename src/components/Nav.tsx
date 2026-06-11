@@ -44,6 +44,14 @@ export default function Nav() {
               </Link>
             );
           })}
+          <button
+            onClick={() => window.dispatchEvent(new Event('ojas:toggle-palette'))}
+            aria-label="Open command palette"
+            title="Command palette"
+            className="hidden items-center gap-1 px-2 py-1 text-xs text-term-muted transition-colors hover:text-term-cyan sm:inline-flex"
+          >
+            <kbd className="rounded border border-term-border px-1.5 py-0.5 text-[10px]">⌘K</kbd>
+          </button>
           <span className="text-term-border">|</span>
           <ThemeToggle />
         </div>

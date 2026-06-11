@@ -4,6 +4,7 @@ import Nav from '@/components/Nav';
 import ChatBot from '@/components/ChatBot';
 import Background from '@/components/Background';
 import CustomCursor from '@/components/CustomCursor';
+import CommandPalette from '@/components/CommandPalette';
 import './globals.css';
 
 const mono = JetBrains_Mono({
@@ -68,6 +69,7 @@ export default function RootLayout({
         <CustomCursor />
         <Nav />
         <main className="pt-14">{children}</main>
+        <CommandPalette />
         <ChatBot />
       </body>
     </html>
