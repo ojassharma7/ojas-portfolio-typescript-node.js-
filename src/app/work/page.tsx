@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import ContinueFooter from '@/components/ContinueFooter';
 import CountUp from '@/components/CountUp';
 import Highlight from '@/components/Highlight';
 import ImpactPipeline from '@/components/ImpactPipeline';
@@ -282,12 +282,11 @@ export default function Work() {
       </Reveal>
 
       <Reveal>
-        <p className="text-center text-sm text-term-muted">
-          <Link href="/life" className="text-term-purple hover:text-term-cyan">
-            cd ../life →
-          </Link>{' '}
-          there&apos;s more to me than models.
-        </p>
+        <ContinueFooter
+          href="/life"
+          cmd="cd ~/life"
+          label="there's more to me than models — football, the comeback, the runs."
+        />
       </Reveal>
     </div>
   );

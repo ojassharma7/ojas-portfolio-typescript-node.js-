@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import ContinueFooter from '@/components/ContinueFooter';
 import PhotoGrid from '@/components/PhotoGrid';
 import Reveal from '@/components/Reveal';
 import RunningChart from '@/components/RunningChart';
@@ -138,7 +138,7 @@ export default function Life() {
       </section>
 
       <Reveal>
-        <p className="text-center text-sm text-term-muted">
+        <p className="mb-8 text-center text-sm text-term-muted">
           <span className="prompt-symbol"># </span>same human, different terminal — if any of
           this resonates, say hi anytime at{' '}
           <a
@@ -148,12 +148,11 @@ export default function Life() {
             ojassharma16@gmail.com
           </a>
         </p>
-        <p className="mt-4 text-center text-sm text-term-muted">
-          <Link href="/work" className="text-term-cyan hover:text-term-purple">
-            cd ../work →
-          </Link>{' '}
-          back to the day job.
-        </p>
+        <ContinueFooter
+          href="/"
+          cmd="cd ~"
+          label="back to the start — the home prompt."
+        />
       </Reveal>
     </div>
   );
