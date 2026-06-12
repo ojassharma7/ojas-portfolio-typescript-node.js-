@@ -10,9 +10,37 @@ import type { PacePoint, StravaData, Totals } from '@/lib/strava';
 const ORANGE = '#FC4C02';
 
 type Period = 'all' | 'year' | 'recent';
+type Unit = 'km' | 'mi';
+
+// unit conversions
+const KM_TO_MI = 0.621371;
+const M_TO_FT = 3.28084;
+const PACE_KM_TO_MI = 1.609344; // multiply sec/km to get sec/mi
+
+const round1 = (x: number) => Math.round(x * 10) / 10;
+const fmtMMSS = (sec: number) =>
+  `${Math.floor(sec / 60)}:${Math.round(sec % 60).toString().padStart(2, '0')}`;
+
+/** Distance for headline tiles (whole numbers). */
+const dist = (km: number, u: Unit) => (u === 'mi' ? Math.round(km * KM_TO_MI) : km);
+/** Distance for individual runs (one decimal). */
+const distFine = (km: number, u: Unit) => (u === 'mi' ? round1(km * KM_TO_MI) : km);
+const elev = (m: number, u: Unit) => (u === 'mi' ? Math.round(m * M_TO_FT) : m);
+const distLabel = (u: Unit) => (u === 'mi' ? 'mi' : 'km');
+const elevLabel = (u: Unit) => (u === 'mi' ? 'ft' : 'm');
+const paceLabel = (u: Unit) => (u === 'mi' ? '/mi' : '/km');
+const paceSecFor = (secPerKm: number, u: Unit) =>
+  u === 'mi' ? secPerKm * PACE_KM_TO_MI : secPerKm;
+/** Convert a pre-formatted "m:ss" /km pace string to the chosen unit. */
+function convertPaceStr(str: string, u: Unit): string {
+  const m = str.match(/^(\d+):(\d+)$/);
+  if (!m) return str;
+  const secPerKm = +m[1] * 60 + +m[2];
+  return fmtMMSS(paceSecFor(secPerKm, u));
+}
 
 /** Interactive pace area-chart with a hover guide that reads off the nearest run. */
-function PaceChart({ points }: { points: PacePoint[] }) {
+function PaceChart({ points, unit }: { points: PacePoint[]; unit: Unit }) {
   const [hover, setHover] = useState<number | null>(null);
   const w = 320;
   const h = 84;
@@ -74,13 +102,14 @@ function PaceChart({ points }: { points: PacePoint[] }) {
           <line x1={coords[hover][0]} y1={pad} x2={coords[hover][0]} y2={h - pad} stroke={ORANGE} strokeOpacity={0.4} strokeWidth={0.7} />
           <circle cx={coords[hover][0]} cy={coords[hover][1]} r={3} fill={ORANGE} />
           <text
-            x={Math.min(Math.max(coords[hover][0], 22), w - 22)}
+            x={Math.min(Math.max(coords[hover][0], 28), w - 28)}
             y={11}
             textAnchor="middle"
             fontSize="9"
             fill="rgb(var(--t-text))"
           >
-            {fmtPace(points[hover].paceSec)}/km · {points[hover].date}
+            {fmtPace(paceSecFor(points[hover].paceSec, unit))}
+            {paceLabel(unit)} · {points[hover].date}
           </text>
         </>
       )}
@@ -88,12 +117,12 @@ function PaceChart({ points }: { points: PacePoint[] }) {
   );
 }
 
-function StatTile({ value, suffix, label, period }: { value: number; suffix: string; label: string; period: Period }) {
+function StatTile({ value, suffix, label, reKey }: { value: number; suffix: string; label: string; reKey: string }) {
   return (
     <div className="rounded-lg border border-term-border bg-term-bg px-3 py-4 text-center transition-colors hover:border-[#FC4C02]/60">
       <div className="text-2xl font-bold" style={{ color: ORANGE }}>
-        {/* key forces a re-count whenever the period tab changes */}
-        <CountUp key={`${period}-${label}`} value={`${value}`} />
+        {/* key forces a re-count whenever the period tab or unit changes */}
+        <CountUp key={reKey} value={`${value}`} />
         <span className="text-base">{suffix}</span>
       </div>
       <div className="mt-1 text-[11px] text-term-muted">{label}</div>
@@ -105,6 +134,7 @@ export default function StravaDashboard({ fallback }: { fallback: React.ReactNod
   const [data, setData] = useState<StravaData | null>(null);
   const [failed, setFailed] = useState(false);
   const [period, setPeriod] = useState<Period>('all');
+  const [unit, setUnit] = useState<Unit>('km');
 
   useEffect(() => {
     fetch('/api/strava')
@@ -112,6 +142,18 @@ export default function StravaDashboard({ fallback }: { fallback: React.ReactNod
       .then((d: StravaData) => setData(d))
       .catch(() => setFailed(true));
   }, []);
+
+  // remember the visitor's preference (handy for the American friends 🇺🇸)
+  useEffect(() => {
+    const saved = localStorage.getItem('units');
+    if (saved === 'mi' || saved === 'km') setUnit(saved);
+  }, []);
+  const pickUnit = (u: Unit) => {
+    setUnit(u);
+    try {
+      localStorage.setItem('units', u);
+    } catch {}
+  };
 
   const maxKm = useMemo(() => Math.max(...(data?.weekly.map((w) => w.km) ?? [1]), 1), [data]);
   const maxRunKm = useMemo(() => Math.max(...(data?.recentRuns.map((r) => r.km) ?? [1]), 1), [data]);
@@ -136,21 +178,39 @@ export default function StravaDashboard({ fallback }: { fallback: React.ReactNod
 
   return (
     <div className="space-y-7">
-      {/* period tabs + profile link */}
+      {/* period tabs + unit toggle + profile link */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="inline-flex rounded-lg border border-term-border bg-term-bg p-0.5 text-xs">
-          {tabs.map((tab) => (
-            <button
-              key={tab.key}
-              onClick={() => setPeriod(tab.key)}
-              className={`rounded-md px-3 py-1.5 transition-colors ${
-                period === tab.key ? 'text-term-bg' : 'text-term-muted hover:text-term-text'
-              }`}
-              style={period === tab.key ? { backgroundColor: ORANGE } : undefined}
-            >
-              {tab.label}
-            </button>
-          ))}
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="inline-flex rounded-lg border border-term-border bg-term-bg p-0.5 text-xs">
+            {tabs.map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => setPeriod(tab.key)}
+                className={`rounded-md px-3 py-1.5 transition-colors ${
+                  period === tab.key ? 'text-term-bg' : 'text-term-muted hover:text-term-text'
+                }`}
+                style={period === tab.key ? { backgroundColor: ORANGE } : undefined}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+          {/* km / mi unit toggle */}
+          <div className="inline-flex rounded-lg border border-term-border bg-term-bg p-0.5 text-xs">
+            {(['km', 'mi'] as Unit[]).map((u) => (
+              <button
+                key={u}
+                onClick={() => pickUnit(u)}
+                aria-pressed={unit === u}
+                className={`rounded-md px-3 py-1.5 transition-colors ${
+                  unit === u ? 'text-term-bg' : 'text-term-muted hover:text-term-text'
+                }`}
+                style={unit === u ? { backgroundColor: ORANGE } : undefined}
+              >
+                {u}
+              </button>
+            ))}
+          </div>
         </div>
         <a
           href={identity.strava}
@@ -164,24 +224,24 @@ export default function StravaDashboard({ fallback }: { fallback: React.ReactNod
         </a>
       </div>
 
-      {/* headline stats — swap + re-animate per period */}
+      {/* headline stats — swap + re-animate per period / unit */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatTile value={t.km} suffix=" km" label="distance" period={period} />
-        <StatTile value={t.count} suffix="" label="runs" period={period} />
-        <StatTile value={t.hours} suffix=" h" label="moving time" period={period} />
-        <StatTile value={t.elevM} suffix=" m" label="elevation" period={period} />
+        <StatTile value={dist(t.km, unit)} suffix={` ${distLabel(unit)}`} label="distance" reKey={`${period}-${unit}-dist`} />
+        <StatTile value={t.count} suffix="" label="runs" reKey={`${period}-runs`} />
+        <StatTile value={t.hours} suffix=" h" label="moving time" reKey={`${period}-time`} />
+        <StatTile value={elev(t.elevM, unit)} suffix={` ${elevLabel(unit)}`} label="elevation" reKey={`${period}-${unit}-elev`} />
       </div>
 
       {/* personal records strip */}
       <div className="flex flex-wrap gap-2 text-xs">
         <span className="rounded border border-term-border bg-term-bg px-3 py-1.5 text-term-muted">
-          longest run <span style={{ color: ORANGE }} className="font-bold">{data.records.longestRunKm} km</span>
+          longest run <span style={{ color: ORANGE }} className="font-bold">{distFine(data.records.longestRunKm, unit)} {distLabel(unit)}</span>
         </span>
         <span className="rounded border border-term-border bg-term-bg px-3 py-1.5 text-term-muted">
-          biggest climb <span style={{ color: ORANGE }} className="font-bold">{data.records.biggestClimbM} m</span>
+          biggest climb <span style={{ color: ORANGE }} className="font-bold">{elev(data.records.biggestClimbM, unit)} {elevLabel(unit)}</span>
         </span>
         <span className="rounded border border-term-border bg-term-bg px-3 py-1.5 text-term-muted">
-          {year} avg pace <span style={{ color: ORANGE }} className="font-bold">{data.avgPace}/km</span>
+          {year} avg pace <span style={{ color: ORANGE }} className="font-bold">{convertPaceStr(data.avgPace, unit)}{paceLabel(unit)}</span>
         </span>
         {life.running.prs.fiveK && (
           <span className="rounded border border-term-border bg-term-bg px-3 py-1.5 text-term-muted">
@@ -204,7 +264,7 @@ export default function StravaDashboard({ fallback }: { fallback: React.ReactNod
             return (
               <div key={i} className="group relative flex h-full flex-1 flex-col justify-end">
                 <span className="pointer-events-none absolute -top-5 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded bg-term-raised px-1.5 py-0.5 text-[10px] text-term-text opacity-0 shadow transition-opacity group-hover:opacity-100">
-                  {wk.km} km
+                  {distFine(wk.km, unit)} {distLabel(unit)}
                 </span>
                 <motion.div
                   initial={{ height: '0%' }}
@@ -233,7 +293,7 @@ export default function StravaDashboard({ fallback }: { fallback: React.ReactNod
           pace trend — last {data.paceTrend.length} runs{' '}
           <span className="text-term-border">(hover · higher = faster)</span>
         </div>
-        <PaceChart points={data.paceTrend} />
+        <PaceChart points={data.paceTrend} unit={unit} />
       </div>
 
       {/* recent runs feed */}
@@ -248,8 +308,8 @@ export default function StravaDashboard({ fallback }: { fallback: React.ReactNod
               <div className="flex items-baseline gap-2 text-sm">
                 <span className="prompt-symbol shrink-0 text-xs">{run.date}</span>
                 <span className="min-w-0 flex-1 truncate text-term-text">{run.name}</span>
-                <span className="shrink-0 font-bold" style={{ color: ORANGE }}>{run.km} km</span>
-                <span className="shrink-0 text-term-muted">{run.pace}/km</span>
+                <span className="shrink-0 font-bold" style={{ color: ORANGE }}>{distFine(run.km, unit)} {distLabel(unit)}</span>
+                <span className="shrink-0 text-term-muted">{convertPaceStr(run.pace, unit)}{paceLabel(unit)}</span>
               </div>
               <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-term-border/40">
                 <motion.div

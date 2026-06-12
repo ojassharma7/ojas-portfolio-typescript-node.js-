@@ -5,6 +5,7 @@ import CountUp from '@/components/CountUp';
 import GitHubShowcase from '@/components/GitHubShowcase';
 import Highlight from '@/components/Highlight';
 import ImpactPipeline from '@/components/ImpactPipeline';
+import Recommendations from '@/components/Recommendations';
 import Reveal from '@/components/Reveal';
 import SectionHeader from '@/components/SectionHeader';
 import Window from '@/components/Window';
@@ -92,6 +93,15 @@ export default function Work() {
             ))}
           </div>
         </Window>
+      </Reveal>
+
+      {/* recommendation — social proof for the Rutgers work above */}
+      <Reveal>
+        <p className="mb-4 text-sm text-term-muted">
+          <span className="prompt-symbol">$ </span>cat{' '}
+          <span className="text-term-cyan/80">recommendation.txt</span>
+        </p>
+        <Recommendations />
       </Reveal>
 
       {/* experience timeline */}

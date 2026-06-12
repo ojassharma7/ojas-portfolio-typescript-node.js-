@@ -126,6 +126,27 @@ export const experiences: Experience[] = [
   },
 ];
 
+export type Recommendation = {
+  name: string;
+  title: string;
+  relation: string;
+  date: string;
+  text: string;
+  source: string;
+};
+
+export const recommendations: Recommendation[] = [
+  {
+    name: 'Jackie Friedman Stanmyre',
+    title:
+      'Assistant Director, Center for Gambling Studies — Rutgers University School of Social Work',
+    relation: 'managed Ojas directly',
+    date: 'December 2025',
+    text: 'Ojas has been an invaluable asset as a data scientist with the Center for Gambling Studies team. He has guided the development of unsupervised machine learning algorithms to classify the risk level of gamblers based on behavioral data. Throughout this process, he has shown an eagerness to understand the base of literature to combine subject matter knowledge with his data science expertise.',
+    source: 'LinkedIn',
+  },
+];
+
 export type Project = {
   title: string;
   file: string;
@@ -356,6 +377,9 @@ ${projects.map((p) => `- ${p.title} (${p.github}): ${p.description} ${p.details.
 
 == SKILLS ==
 ${skills.map((s) => `${s.group}: ${s.items.join(', ')}`).join('\n')}
+
+== RECOMMENDATIONS (verified, from real colleagues) ==
+${recommendations.map((r) => `"${r.text}" — ${r.name}, ${r.title} (${r.relation}, ${r.date}, via ${r.source})`).join('\n')}
 
 == LIFE ==
 Before data science, Ojas was a professional footballer in Germany. A torn ACL ended his playing career, and during recovery he pivoted to data science — bringing an athlete's discipline to ML and AI work. He still runs about ${life.running.weeklyKm} km per week, tracked on Strava (a live dashboard on this site visualizes it). He builds side projects for fun, including this portfolio and the chatbot you are right now.
